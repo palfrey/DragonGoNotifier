@@ -1,0 +1,1241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <option name="DEFAULT_COMPILER" />
+    <resourceExtensions />
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+      <entry name="!?*.form" />
+      <entry name="!?*.class" />
+      <entry name="!?*.groovy" />
+      <entry name="!?*.scala" />
+      <entry name="!?*.flex" />
+      <entry name="!?*.kt" />
+      <entry name="!?*.clj" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="CopyrightManager" default="" />
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DebuggerManager">
+    <breakpoint_any converted="true">
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </breakpoint_any>
+    <ui_properties converted="true" />
+    <breakpoint_rules converted="true" />
+  </component>
+  <component name="DependencyValidationManager">
+    <option name="SKIP_IMPORT_STATEMENTS" value="false" />
+  </component>
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="availableTasks">
+      <set>
+        <GradleTaskDescriptor>
+          <option name="description" value="Displays the Android dependencies of the project" />
+          <option name="name" value="androidDependencies" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles the outputs of this project." />
+          <option name="name" value="assemble" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles all Debug builds" />
+          <option name="name" value="assembleDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles all NoAnalytics builds" />
+          <option name="name" value="assembleNoAnalytics" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles all builds for flavor combination: NoAnalyticsNoCloud" />
+          <option name="name" value="assembleNoAnalyticsNoCloud" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles the Debug build for flavor NoAnalyticsNoCloud" />
+          <option name="name" value="assembleNoAnalyticsNoCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles the Test build for the NoAnalyticsNoCloudDebug build" />
+          <option name="name" value="assembleNoAnalyticsNoCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles the Release build for flavor NoAnalyticsNoCloud" />
+          <option name="name" value="assembleNoAnalyticsNoCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles all builds for flavor combination: NoAnalyticsWithCloud" />
+          <option name="name" value="assembleNoAnalyticsWithCloud" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles the Debug build for flavor NoAnalyticsWithCloud" />
+          <option name="name" value="assembleNoAnalyticsWithCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles the Test build for the NoAnalyticsWithCloudDebug build" />
+          <option name="name" value="assembleNoAnalyticsWithCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles the Release build for flavor NoAnalyticsWithCloud" />
+          <option name="name" value="assembleNoAnalyticsWithCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles all NoCloud builds" />
+          <option name="name" value="assembleNoCloud" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles all Release builds" />
+          <option name="name" value="assembleRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles all the Test applications" />
+          <option name="name" value="assembleTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles all WithAnalytics builds" />
+          <option name="name" value="assembleWithAnalytics" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles all builds for flavor combination: WithAnalyticsNoCloud" />
+          <option name="name" value="assembleWithAnalyticsNoCloud" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles the Debug build for flavor WithAnalyticsNoCloud" />
+          <option name="name" value="assembleWithAnalyticsNoCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles the Test build for the WithAnalyticsNoCloudDebug build" />
+          <option name="name" value="assembleWithAnalyticsNoCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles the Release build for flavor WithAnalyticsNoCloud" />
+          <option name="name" value="assembleWithAnalyticsNoCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles all builds for flavor combination: WithAnalyticsWithCloud" />
+          <option name="name" value="assembleWithAnalyticsWithCloud" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles the Debug build for flavor WithAnalyticsWithCloud" />
+          <option name="name" value="assembleWithAnalyticsWithCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles the Test build for the WithAnalyticsWithCloudDebug build" />
+          <option name="name" value="assembleWithAnalyticsWithCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles the Release build for flavor WithAnalyticsWithCloud" />
+          <option name="name" value="assembleWithAnalyticsWithCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles all WithCloud builds" />
+          <option name="name" value="assembleWithCloud" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles and tests this project." />
+          <option name="name" value="build" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles and tests this project and all projects that depend on it." />
+          <option name="name" value="buildDependents" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles and tests this project and all projects it depends on." />
+          <option name="name" value="buildNeeded" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs all checks." />
+          <option name="name" value="check" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="checkNoAnalyticsNoCloudDebugManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="checkNoAnalyticsNoCloudReleaseManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="checkNoAnalyticsWithCloudDebugManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="checkNoAnalyticsWithCloudReleaseManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="checkWithAnalyticsNoCloudDebugManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="checkWithAnalyticsNoCloudReleaseManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="checkWithAnalyticsWithCloudDebugManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="checkWithAnalyticsWithCloudReleaseManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles classes 'main'." />
+          <option name="name" value="classes" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Deletes the build directory." />
+          <option name="name" value="clean" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Compiles Java source 'main:java'." />
+          <option name="name" value="compileJava" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileLint" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsNoCloudDebugAidl" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsNoCloudDebugJava" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsNoCloudDebugNdk" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsNoCloudDebugRenderscript" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsNoCloudDebugTestAidl" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsNoCloudDebugTestJava" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsNoCloudDebugTestNdk" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsNoCloudDebugTestRenderscript" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsNoCloudReleaseAidl" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsNoCloudReleaseJava" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsNoCloudReleaseNdk" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsNoCloudReleaseRenderscript" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsWithCloudDebugAidl" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsWithCloudDebugJava" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsWithCloudDebugNdk" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsWithCloudDebugRenderscript" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsWithCloudDebugTestAidl" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsWithCloudDebugTestJava" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsWithCloudDebugTestNdk" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsWithCloudDebugTestRenderscript" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsWithCloudReleaseAidl" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsWithCloudReleaseJava" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsWithCloudReleaseNdk" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileNoAnalyticsWithCloudReleaseRenderscript" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Compiles Java source 'test:java'." />
+          <option name="name" value="compileTestJava" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsNoCloudDebugAidl" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsNoCloudDebugJava" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsNoCloudDebugNdk" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsNoCloudDebugRenderscript" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsNoCloudDebugTestAidl" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsNoCloudDebugTestJava" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsNoCloudDebugTestNdk" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsNoCloudDebugTestRenderscript" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsNoCloudReleaseAidl" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsNoCloudReleaseJava" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsNoCloudReleaseNdk" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsNoCloudReleaseRenderscript" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsWithCloudDebugAidl" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsWithCloudDebugJava" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsWithCloudDebugNdk" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsWithCloudDebugRenderscript" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsWithCloudDebugTestAidl" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsWithCloudDebugTestJava" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsWithCloudDebugTestNdk" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsWithCloudDebugTestRenderscript" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsWithCloudReleaseAidl" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsWithCloudReleaseJava" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsWithCloudReleaseNdk" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="compileWithAnalyticsWithCloudReleaseRenderscript" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Installs and runs instrumentation tests for all flavors on connected devices." />
+          <option name="name" value="connectedAndroidTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Installs and runs the tests for Build 'noAnalyticsNoCloudDebug' on connected devices." />
+          <option name="name" value="connectedAndroidTestNoAnalyticsNoCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Installs and runs the tests for Build 'noAnalyticsWithCloudDebug' on connected devices." />
+          <option name="name" value="connectedAndroidTestNoAnalyticsWithCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Installs and runs the tests for Build 'withAnalyticsNoCloudDebug' on connected devices." />
+          <option name="name" value="connectedAndroidTestWithAnalyticsNoCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Installs and runs the tests for Build 'withAnalyticsWithCloudDebug' on connected devices." />
+          <option name="name" value="connectedAndroidTestWithAnalyticsWithCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs all device checks on currently connected devices." />
+          <option name="name" value="connectedCheck" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Installs and runs instrumentation tests using all Device Providers." />
+          <option name="name" value="deviceAndroidTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs all device checks using Device Providers and Test Servers." />
+          <option name="name" value="deviceCheck" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="dexNoAnalyticsNoCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="dexNoAnalyticsNoCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="dexNoAnalyticsNoCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="dexNoAnalyticsWithCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="dexNoAnalyticsWithCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="dexNoAnalyticsWithCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="dexWithAnalyticsNoCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="dexWithAnalyticsNoCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="dexWithAnalyticsNoCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="dexWithAnalyticsWithCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="dexWithAnalyticsWithCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="dexWithAnalyticsWithCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsNoCloudDebugBuildConfig" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsNoCloudDebugResValues" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsNoCloudDebugResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsNoCloudDebugSources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsNoCloudDebugTestBuildConfig" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsNoCloudDebugTestResValues" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsNoCloudDebugTestResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsNoCloudDebugTestSources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsNoCloudReleaseBuildConfig" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsNoCloudReleaseResValues" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsNoCloudReleaseResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsNoCloudReleaseSources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsWithCloudDebugBuildConfig" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsWithCloudDebugResValues" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsWithCloudDebugResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsWithCloudDebugSources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsWithCloudDebugTestBuildConfig" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsWithCloudDebugTestResValues" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsWithCloudDebugTestResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsWithCloudDebugTestSources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsWithCloudReleaseBuildConfig" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsWithCloudReleaseResValues" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsWithCloudReleaseResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateNoAnalyticsWithCloudReleaseSources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsNoCloudDebugBuildConfig" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsNoCloudDebugResValues" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsNoCloudDebugResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsNoCloudDebugSources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsNoCloudDebugTestBuildConfig" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsNoCloudDebugTestResValues" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsNoCloudDebugTestResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsNoCloudDebugTestSources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsNoCloudReleaseBuildConfig" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsNoCloudReleaseResValues" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsNoCloudReleaseResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsNoCloudReleaseSources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsWithCloudDebugBuildConfig" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsWithCloudDebugResValues" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsWithCloudDebugResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsWithCloudDebugSources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsWithCloudDebugTestBuildConfig" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsWithCloudDebugTestResValues" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsWithCloudDebugTestResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsWithCloudDebugTestSources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsWithCloudReleaseBuildConfig" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsWithCloudReleaseResValues" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsWithCloudReleaseResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="generateWithAnalyticsWithCloudReleaseSources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Installs the Debug build for flavor NoAnalyticsNoCloud" />
+          <option name="name" value="installNoAnalyticsNoCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Installs the Test build for the NoAnalyticsNoCloudDebug build" />
+          <option name="name" value="installNoAnalyticsNoCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Installs the Debug build for flavor NoAnalyticsWithCloud" />
+          <option name="name" value="installNoAnalyticsWithCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Installs the Test build for the NoAnalyticsWithCloudDebug build" />
+          <option name="name" value="installNoAnalyticsWithCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Installs the Debug build for flavor WithAnalyticsNoCloud" />
+          <option name="name" value="installWithAnalyticsNoCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Installs the Test build for the WithAnalyticsNoCloudDebug build" />
+          <option name="name" value="installWithAnalyticsNoCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Installs the Debug build for flavor WithAnalyticsWithCloud" />
+          <option name="name" value="installWithAnalyticsWithCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Installs the Test build for the WithAnalyticsWithCloudDebug build" />
+          <option name="name" value="installWithAnalyticsWithCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles a jar archive containing the main classes." />
+          <option name="name" value="jar" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Generates Javadoc API documentation for the main source code." />
+          <option name="name" value="javadoc" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs lint on all variants." />
+          <option name="name" value="lint" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs lint on the NoAnalyticsNoCloudDebug build" />
+          <option name="name" value="lintNoAnalyticsNoCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs lint on the NoAnalyticsNoCloudRelease build" />
+          <option name="name" value="lintNoAnalyticsNoCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs lint on the NoAnalyticsWithCloudDebug build" />
+          <option name="name" value="lintNoAnalyticsWithCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs lint on the NoAnalyticsWithCloudRelease build" />
+          <option name="name" value="lintNoAnalyticsWithCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs lint on just the fatal issues in the NoAnalyticsNoCloudRelease build" />
+          <option name="name" value="lintVitalNoAnalyticsNoCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs lint on just the fatal issues in the NoAnalyticsWithCloudRelease build" />
+          <option name="name" value="lintVitalNoAnalyticsWithCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs lint on just the fatal issues in the WithAnalyticsNoCloudRelease build" />
+          <option name="name" value="lintVitalWithAnalyticsNoCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs lint on just the fatal issues in the WithAnalyticsWithCloudRelease build" />
+          <option name="name" value="lintVitalWithAnalyticsWithCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs lint on the WithAnalyticsNoCloudDebug build" />
+          <option name="name" value="lintWithAnalyticsNoCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs lint on the WithAnalyticsNoCloudRelease build" />
+          <option name="name" value="lintWithAnalyticsNoCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs lint on the WithAnalyticsWithCloudDebug build" />
+          <option name="name" value="lintWithAnalyticsWithCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs lint on the WithAnalyticsWithCloudRelease build" />
+          <option name="name" value="lintWithAnalyticsWithCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeNoAnalyticsNoCloudDebugAssets" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeNoAnalyticsNoCloudDebugResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeNoAnalyticsNoCloudDebugTestAssets" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeNoAnalyticsNoCloudDebugTestResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeNoAnalyticsNoCloudReleaseAssets" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeNoAnalyticsNoCloudReleaseResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeNoAnalyticsWithCloudDebugAssets" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeNoAnalyticsWithCloudDebugResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeNoAnalyticsWithCloudDebugTestAssets" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeNoAnalyticsWithCloudDebugTestResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeNoAnalyticsWithCloudReleaseAssets" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeNoAnalyticsWithCloudReleaseResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeWithAnalyticsNoCloudDebugAssets" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeWithAnalyticsNoCloudDebugResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeWithAnalyticsNoCloudDebugTestAssets" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeWithAnalyticsNoCloudDebugTestResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeWithAnalyticsNoCloudReleaseAssets" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeWithAnalyticsNoCloudReleaseResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeWithAnalyticsWithCloudDebugAssets" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeWithAnalyticsWithCloudDebugResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeWithAnalyticsWithCloudDebugTestAssets" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeWithAnalyticsWithCloudDebugTestResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeWithAnalyticsWithCloudReleaseAssets" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="mergeWithAnalyticsWithCloudReleaseResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="packageNoAnalyticsNoCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="packageNoAnalyticsNoCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="packageNoAnalyticsNoCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="packageNoAnalyticsWithCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="packageNoAnalyticsWithCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="packageNoAnalyticsWithCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="packageWithAnalyticsNoCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="packageWithAnalyticsNoCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="packageWithAnalyticsNoCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="packageWithAnalyticsWithCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="packageWithAnalyticsWithCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="packageWithAnalyticsWithCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preBuild" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preDexNoAnalyticsNoCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preDexNoAnalyticsNoCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preDexNoAnalyticsNoCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preDexNoAnalyticsWithCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preDexNoAnalyticsWithCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preDexNoAnalyticsWithCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preDexWithAnalyticsNoCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preDexWithAnalyticsNoCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preDexWithAnalyticsNoCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preDexWithAnalyticsWithCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preDexWithAnalyticsWithCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preDexWithAnalyticsWithCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preNoAnalyticsNoCloudDebugBuild" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preNoAnalyticsNoCloudDebugTestBuild" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preNoAnalyticsNoCloudReleaseBuild" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preNoAnalyticsWithCloudDebugBuild" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preNoAnalyticsWithCloudDebugTestBuild" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preNoAnalyticsWithCloudReleaseBuild" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preWithAnalyticsNoCloudDebugBuild" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preWithAnalyticsNoCloudDebugTestBuild" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preWithAnalyticsNoCloudReleaseBuild" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preWithAnalyticsWithCloudDebugBuild" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preWithAnalyticsWithCloudDebugTestBuild" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="preWithAnalyticsWithCloudReleaseBuild" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Prepare com.android.support:appcompat-v7:19.0.0" />
+          <option name="name" value="prepareComAndroidSupportAppcompatV71900Library" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Prepare com.google.android.gms:play-services:3.1.36" />
+          <option name="name" value="prepareComGoogleAndroidGmsPlayServices3136Library" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="prepareNoAnalyticsNoCloudDebugDependencies" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="prepareNoAnalyticsNoCloudDebugTestDependencies" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="prepareNoAnalyticsNoCloudReleaseDependencies" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="prepareNoAnalyticsWithCloudDebugDependencies" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="prepareNoAnalyticsWithCloudDebugTestDependencies" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="prepareNoAnalyticsWithCloudReleaseDependencies" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="prepareWithAnalyticsNoCloudDebugDependencies" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="prepareWithAnalyticsNoCloudDebugTestDependencies" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="prepareWithAnalyticsNoCloudReleaseDependencies" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="prepareWithAnalyticsWithCloudDebugDependencies" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="prepareWithAnalyticsWithCloudDebugTestDependencies" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="prepareWithAnalyticsWithCloudReleaseDependencies" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsNoCloudDebugJavaRes" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsNoCloudDebugManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsNoCloudDebugResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsNoCloudDebugTestJavaRes" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsNoCloudDebugTestManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsNoCloudDebugTestResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsNoCloudReleaseJavaRes" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsNoCloudReleaseManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsNoCloudReleaseResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsWithCloudDebugJavaRes" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsWithCloudDebugManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsWithCloudDebugResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsWithCloudDebugTestJavaRes" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsWithCloudDebugTestManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsWithCloudDebugTestResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsWithCloudReleaseJavaRes" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsWithCloudReleaseManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processNoAnalyticsWithCloudReleaseResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Processes resources 'main:resources'." />
+          <option name="name" value="processResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Processes resources 'test:resources'." />
+          <option name="name" value="processTestResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsNoCloudDebugJavaRes" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsNoCloudDebugManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsNoCloudDebugResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsNoCloudDebugTestJavaRes" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsNoCloudDebugTestManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsNoCloudDebugTestResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsNoCloudReleaseJavaRes" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsNoCloudReleaseManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsNoCloudReleaseResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsWithCloudDebugJavaRes" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsWithCloudDebugManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsWithCloudDebugResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsWithCloudDebugTestJavaRes" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsWithCloudDebugTestManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsWithCloudDebugTestResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsWithCloudReleaseJavaRes" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsWithCloudReleaseManifest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="processWithAnalyticsWithCloudReleaseResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Displays the signing info for each variant" />
+          <option name="name" value="signingReport" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs the unit tests." />
+          <option name="name" value="test" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles classes 'test'." />
+          <option name="name" value="testClasses" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Uninstall all applications." />
+          <option name="name" value="uninstallAll" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Uninstalls the Debug build for flavor NoAnalyticsNoCloud" />
+          <option name="name" value="uninstallNoAnalyticsNoCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Uninstalls the Test build for the NoAnalyticsNoCloudDebug build" />
+          <option name="name" value="uninstallNoAnalyticsNoCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Uninstalls the Release build for flavor NoAnalyticsNoCloud" />
+          <option name="name" value="uninstallNoAnalyticsNoCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Uninstalls the Debug build for flavor NoAnalyticsWithCloud" />
+          <option name="name" value="uninstallNoAnalyticsWithCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Uninstalls the Test build for the NoAnalyticsWithCloudDebug build" />
+          <option name="name" value="uninstallNoAnalyticsWithCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Uninstalls the Release build for flavor NoAnalyticsWithCloud" />
+          <option name="name" value="uninstallNoAnalyticsWithCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Uninstalls the Debug build for flavor WithAnalyticsNoCloud" />
+          <option name="name" value="uninstallWithAnalyticsNoCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Uninstalls the Test build for the WithAnalyticsNoCloudDebug build" />
+          <option name="name" value="uninstallWithAnalyticsNoCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Uninstalls the Release build for flavor WithAnalyticsNoCloud" />
+          <option name="name" value="uninstallWithAnalyticsNoCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Uninstalls the Debug build for flavor WithAnalyticsWithCloud" />
+          <option name="name" value="uninstallWithAnalyticsWithCloudDebug" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Uninstalls the Test build for the WithAnalyticsWithCloudDebug build" />
+          <option name="name" value="uninstallWithAnalyticsWithCloudDebugTest" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Uninstalls the Release build for flavor WithAnalyticsWithCloud" />
+          <option name="name" value="uninstallWithAnalyticsWithCloudRelease" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="validateDebugSigning" />
+        </GradleTaskDescriptor>
+      </set>
+    </option>
+  </component>
+  <component name="GradleSettings">
+    <option name="gradleHome" value="/usr/local/opt/gradle/libexec" />
+    <option name="preferLocalInstallationToWrapper" value="true" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectModuleManager">
+    <modules />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <list size="0" />
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.6</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
