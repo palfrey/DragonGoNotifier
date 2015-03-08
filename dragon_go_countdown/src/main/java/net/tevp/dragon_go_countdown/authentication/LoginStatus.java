@@ -1,4 +1,4 @@
-package net.tevp.dragon_go_countdown;
+package net.tevp.dragon_go_countdown.authentication;
 
 public enum LoginStatus {
     SUCCESS,

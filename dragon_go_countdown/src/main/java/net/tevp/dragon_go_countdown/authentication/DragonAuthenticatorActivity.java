@@ -1,4 +1,4 @@
-package net.tevp.dragon_go_countdown;
+package net.tevp.dragon_go_countdown.authentication;
 
 import android.accounts.Account;
 import android.accounts.AccountAuthenticatorActivity;
@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import net.tevp.dragon_go_countdown.R;
 
 /**
  * A login screen that offers login via username/password.

@@ -1,4 +1,4 @@
-package net.tevp.dragon_go_countdown;
+package net.tevp.dragon_go_countdown.authentication;
 
 import java.util.Date;
 

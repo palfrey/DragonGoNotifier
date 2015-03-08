@@ -29,11 +29,11 @@
         </receiver>
 
         <activity
-            android:name=".DragonAuthenticatorActivity"
+            android:name=".authentication.DragonAuthenticatorActivity"
             android:label="@string/title_activity_dragon_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
-        <service android:name=".DragonAuthenticatorService">
+        <service android:name=".authentication.DragonAuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
             </intent-filter>
