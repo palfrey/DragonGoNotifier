@@ -33,6 +33,7 @@
             android:label="@string/title_activity_dragon_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
+
         <service android:name=".authentication.DragonAuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator" />
@@ -40,6 +41,15 @@
             <meta-data android:name="android.accounts.AccountAuthenticator"
                 android:resource="@xml/authenticator" />
         </service>
+
+        <provider
+            android:name=".contentProvider.DragonContentProvider"
+            android:authorities="net.tevp.dragon_go_countdown"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:label="DragonContentProvider"
+            android:readPermission="net.tevp.dragon_go_countdown.READ"
+            android:writePermission="net.tevp.dragon_go_countdown.WRITE" />
     </application>
 
 </manifest>
