@@ -1,8 +1,7 @@
 package net.tevp.dragon_go_countdown
 
 import android.content.ContentResolver
-import android.database.Cursor
-import android.net.Uri
+import junit.framework.Assert.assertNotNull
 import net.tevp.dragon_go_countdown.contentProvider.DragonContentProvider
 import net.tevp.dragon_go_countdown.contentProvider.DragonItemsContract
 import org.junit.Before
@@ -12,8 +11,6 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
 import org.robolectric.shadows.ShadowContentResolver
-
-import junit.framework.Assert.assertNotNull
 
 @RunWith(RobolectricTestRunner::class)
 class DragonContentProviderTest {
@@ -41,7 +38,6 @@ class DragonContentProviderTest {
     }
 
     companion object {
-
         internal val validUris = arrayOf(DragonItemsContract.Games.CONTENT_URI)
     }
 }

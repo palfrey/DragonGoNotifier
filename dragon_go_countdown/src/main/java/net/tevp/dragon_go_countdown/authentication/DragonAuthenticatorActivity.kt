@@ -39,7 +39,7 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
     private var mAccountManager: AccountManager? = null
     private var mAuthTokenType: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dragon_login)
 
