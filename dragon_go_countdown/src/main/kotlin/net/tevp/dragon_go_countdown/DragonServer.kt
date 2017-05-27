@@ -1,21 +1,19 @@
-package net.tevp.dragon_go_countdown.authentication
+package net.tevp.dragon_go_countdown
 
 import android.util.Log
 import android.util.Xml.Encoding.UTF_8
 import org.apache.commons.io.IOUtils
-import org.apache.http.client.methods.HttpGet
-import org.apache.http.impl.client.DefaultHttpClient
 import java.io.IOException
 
-object DragonLogin {
+object DragonServer {
     @Throws(IOException::class)
     fun Login(username: String, password: String): LoginResult {
-        val httpClient = DefaultHttpClient()
-        val request = HttpGet("http://www.dragongoserver.net/login.php?quick_mode=1&userid=$username&passwd=$password")
-        val response = httpClient.execute(request)
-        val content = IOUtils.toString(response.entity.content, UTF_8.toString())
+        val url = new java.net.URL("http://www.dragongoserver.net/login.php?quick_mode=1&userid=$username&passwd=$password")
+        val conn = (HttpURLConnection) url.openConnection()
+        val in = new BufferedInputStream(conn.getInputStream())
+        val content = org.apache.commons.io.IOUtils.toString(in, "UTF-8")
         val result = LoginResult()
-        Log.d("DragonLogin", content)
+        Log.d("DragonServer", content)
         if (content.contains("#Error")) {
             if (content.contains("wrong_userid")) {
                 result.status = LoginStatus.BAD_USERNAME
