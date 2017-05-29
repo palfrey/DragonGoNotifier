@@ -11,8 +11,11 @@ buildscript {
 }
 
 ext {
-    supportLibVersion = '22.2.0'  // variable that can be referenced to keep support libs consistent
+    supportLibVersion = '25.1.0'  // variable that can be referenced to keep support libs consistent
+    compileSdkVersion = 25 // should match support lib major version
 }
+
+apply plugin: 'kotlin-kapt'
 
 allprojects {
     repositories {

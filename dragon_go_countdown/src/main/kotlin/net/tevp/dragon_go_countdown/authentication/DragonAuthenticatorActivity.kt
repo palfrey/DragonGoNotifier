@@ -12,12 +12,14 @@ import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
+import butterknife.BindView
+import butterknife.ButterKnife
 import net.tevp.dragon_go_countdown.DragonServer
 import net.tevp.dragon_go_countdown.R
 
@@ -25,24 +27,23 @@ import net.tevp.dragon_go_countdown.R
  * A login screen that offers login via username/password.
  */
 class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
-
-
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private var mAuthTask: UserLoginTask? = null
 
     // UI references.
-    private var mUsernameView: EditText? = null
-    private var mPasswordView: EditText? = null
-    private var mProgressView: View? = null
-    private var mLoginFormView: View? = null
+    @BindView(R.id.username) lateinit var mUsernameView: EditText
+    @BindView(R.id.password) lateinit var mPasswordView: EditText
+    @BindView(R.id.login_progress) lateinit var mProgressView: View
+    @BindView(R.id.login_form) lateinit var mLoginFormView: View
     private var mAccountManager: AccountManager? = null
     private var mAuthTokenType: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dragon_login)
+        ButterKnife.bind(this)
 
         mAccountManager = AccountManager.get(baseContext)
 
@@ -51,26 +52,22 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
             mAuthTokenType = AUTHTOKEN_TYPE_FULL_ACCESS
 
         // Set up the login form.
-        mUsernameView = findViewById(R.id.username) as EditText
         val accountName = intent.getStringExtra(ARG_ACCOUNT_NAME)
         if (accountName != null) {
-            mUsernameView!!.setText(accountName)
+            mUsernameView.setText(accountName)
         }
-
-        mPasswordView = findViewById(R.id.password) as EditText
-        mPasswordView!!.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
+        
+        mPasswordView.setOnEditorActionListener({ _, id, _ ->
             if (id == R.id.login || id == EditorInfo.IME_NULL) {
                 attemptLogin()
-                return@OnEditorActionListener true
+                true
             }
-            false
+            else
+                false
         })
 
         val mUsernameSignInButton = findViewById(R.id.sign_in_button) as Button
         mUsernameSignInButton.setOnClickListener { attemptLogin() }
-
-        mLoginFormView = findViewById(R.id.login_form)
-        mProgressView = findViewById(R.id.login_progress)
     }
 
     /**
@@ -82,28 +79,28 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
         if (mAuthTask != null) {
             return
         }
-
+        
         // Reset errors.
-        mUsernameView!!.error = null
-        mPasswordView!!.error = null
+        mUsernameView.error = null
+        mPasswordView.error = null
 
         // Store values at the time of the login attempt.
-        val username = mUsernameView!!.text.toString()
-        val password = mPasswordView!!.text.toString()
+        val username = mUsernameView.text.toString()
+        val password = mPasswordView.text.toString()
 
         var cancel = false
         var focusView: View? = null
 
         // Check for a valid password, if the user entered one.
         if (TextUtils.isEmpty(password)) {
-            mPasswordView!!.error = getString(R.string.error_incorrect_password)
+            mPasswordView.error = getString(R.string.error_incorrect_password)
             focusView = mPasswordView
             cancel = true
         }
 
         // Check for a valid username
         if (TextUtils.isEmpty(username)) {
-            mUsernameView!!.error = getString(R.string.error_field_required)
+            mUsernameView.error = getString(R.string.error_field_required)
             focusView = mUsernameView
             cancel = true
         }
@@ -132,26 +129,26 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             val shortAnimTime = resources.getInteger(android.R.integer.config_shortAnimTime)
 
-            mLoginFormView!!.visibility = if (show) View.GONE else View.VISIBLE
-            mLoginFormView!!.animate().setDuration(shortAnimTime.toLong()).alpha(
+            mLoginFormView.visibility = if (show) View.GONE else View.VISIBLE
+            mLoginFormView.animate().setDuration(shortAnimTime.toLong()).alpha(
                     (if (show) 0 else 1).toFloat()).setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
-                    mLoginFormView!!.visibility = if (show) View.GONE else View.VISIBLE
+                    mLoginFormView.visibility = if (show) View.GONE else View.VISIBLE
                 }
             })
 
-            mProgressView!!.visibility = if (show) View.VISIBLE else View.GONE
-            mProgressView!!.animate().setDuration(shortAnimTime.toLong()).alpha(
+            mProgressView.visibility = if (show) View.VISIBLE else View.GONE
+            mProgressView.animate().setDuration(shortAnimTime.toLong()).alpha(
                     (if (show) 1 else 0).toFloat()).setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
-                    mProgressView!!.visibility = if (show) View.VISIBLE else View.GONE
+                    mProgressView.visibility = if (show) View.VISIBLE else View.GONE
                 }
             })
         } else {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
-            mProgressView!!.visibility = if (show) View.VISIBLE else View.GONE
-            mLoginFormView!!.visibility = if (show) View.GONE else View.VISIBLE
+            mProgressView.visibility = if (show) View.VISIBLE else View.GONE
+            mLoginFormView.visibility = if (show) View.GONE else View.VISIBLE
         }
     }
 
@@ -196,7 +193,6 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
                     data.putString(AccountManager.KEY_AUTHTOKEN, loginResult!!.sessionCode)
                     data.putString(PARAM_USER_PASS, mPassword)
                 }
-
             } catch (e: Exception) {
                 data.putString(KEY_ERROR_MESSAGE, e.message)
             }
@@ -212,18 +208,18 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
 
             when (loginResult!!.status) {
                 LoginStatus.BAD_PASSWORD -> {
-                    mPasswordView!!.error = getString(R.string.error_incorrect_password)
-                    mPasswordView!!.requestFocus()
+                    mPasswordView.error = getString(R.string.error_incorrect_password)
+                    mPasswordView.requestFocus()
                 }
                 LoginStatus.BAD_USERNAME -> {
-                    mUsernameView!!.error = getString(R.string.error_invalid_username)
-                    mUsernameView!!.requestFocus()
+                    mUsernameView.error = getString(R.string.error_invalid_username)
+                    mUsernameView.requestFocus()
                 }
                 LoginStatus.OTHER_ERROR -> {
                     if (intent.hasExtra(KEY_ERROR_MESSAGE)) {
                         Toast.makeText(baseContext, intent.getStringExtra(KEY_ERROR_MESSAGE), Toast.LENGTH_SHORT).show()
                     }
-                    mUsernameView!!.error = "Some other problems"
+                    mUsernameView.error = "Some other problems"
                 }
                 LoginStatus.SUCCESS -> finishLogin(intent)
             }
