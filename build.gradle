@@ -7,14 +7,11 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
 ext {
-    supportLibVersion = '22.+'  // variable that can be referenced to keep support libs consistent
+    supportLibVersion = '22.2.0'  // variable that can be referenced to keep support libs consistent
 }
 
 allprojects {
