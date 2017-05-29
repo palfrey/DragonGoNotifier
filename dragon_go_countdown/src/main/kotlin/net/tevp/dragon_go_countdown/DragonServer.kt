@@ -7,6 +7,7 @@ import net.tevp.dragon_go_countdown.contentProvider.dao.Game
 import org.apache.commons.io.IOUtils.toString
 import java.io.BufferedInputStream
 import java.io.IOException
+import java.io.StringReader
 import java.net.HttpCookie
 import java.net.HttpURLConnection
 import java.net.URL
@@ -63,6 +64,38 @@ object DragonServer {
         val inStream = BufferedInputStream(conn.inputStream)
         val content = toString(inStream, "UTF-8")
         Log.d(TAG, "Content: $content")
-        return emptyList()
+        var items = Vector<Game>()
+        val csvFormat = org.apache.commons.csv.CSVFormat.DEFAULT.withHeader("G", "game_id", "opponent_handle", "player_color", "lastmove_date", "time_remaining", "game_action", "game_status", "move_id", "tournament_id", "shape_id", "game_type", "game_prio", "opponent_lastaccess_date", "handicap")
+        for (line: String in content.split("\n")) {
+            if (!line.startsWith("G,")) {
+                continue // not a Game
+            }
+            for (record in csvFormat.parse(StringReader(line))) {
+                val raw_time = record.get("time_remaining");
+                val time_segments = raw_time.split(" ")
+                val kind = time_segments[1].last()
+                val count = time_segments[1].dropLast(1).toInt()
+                val end_time: Date? by lazy {
+                    val cal = Calendar.getInstance()
+                    if (kind == 'd') {
+                        cal.add(Calendar.DAY_OF_YEAR, count)
+                    }
+                    else if (kind == 'h') {
+                        cal.add(Calendar.HOUR, count)
+                    }
+                    else {
+                        Log.w(TAG, "Bad time format: $raw_time")
+                        return@lazy null
+                    }
+                    cal.time
+                }
+                if (end_time != null) {
+                    var game = Game(record.get("game_id").toInt(), record.get("opponent_handle"), end_time)
+                    items.add(game)
+                }
+            }
+        }
+        Log.d(TAG, "Games: $items")
+        return items
     }
 }

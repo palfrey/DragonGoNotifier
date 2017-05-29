@@ -5,22 +5,25 @@ import android.database.Cursor
 import net.tevp.dragon_go_countdown.contentProvider.DbSchema
 
 import java.io.Serializable
+import java.util.*
 
-class Game(var opponent_handle: String, var borrower: String) : Serializable {
+class Game(var game_id: Int, var opponent_handle: String, var end_time: Date) : Serializable {
     val contentValues: ContentValues
         get() {
             val values = ContentValues()
+            values.put(DbSchema.COL_ID, game_id)
             values.put(DbSchema.COL_OPPONENT_HANDLE, opponent_handle)
-            values.put(DbSchema.COL_BORROWER, borrower)
+            values.put(DbSchema.COL_END_TIME, end_time.time)
             return values
         }
 
     companion object {
         fun fromCursor(curGames: Cursor): Game {
+            val game_id = curGames.getInt(curGames.getColumnIndex(DbSchema.COL_ID))
             val opponent_handle = curGames.getString(curGames.getColumnIndex(DbSchema.COL_OPPONENT_HANDLE))
-            val borrower = curGames.getString(curGames.getColumnIndex(DbSchema.COL_BORROWER))
+            val end_time_raw = curGames.getLong(curGames.getColumnIndex(DbSchema.COL_END_TIME))
 
-            return Game(opponent_handle, borrower)
+            return Game(game_id, opponent_handle, Date(end_time_raw))
         }
     }
 }

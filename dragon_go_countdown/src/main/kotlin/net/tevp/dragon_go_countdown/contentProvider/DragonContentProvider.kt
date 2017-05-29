@@ -13,17 +13,15 @@ import net.tevp.dragon_go_countdown.contentProvider.DragonItemsContract.Games
 import java.sql.SQLException
 
 class DragonContentProvider : ContentProvider() {
-
-    private var mHelper: DragonItemsOpenHelper? = null
+    private val mHelper: DragonItemsOpenHelper by lazy { DragonItemsOpenHelper(context) }
     private val mIsInBatchMode = ThreadLocal<Boolean>()
     override fun onCreate(): Boolean {
-        mHelper = DragonItemsOpenHelper(context)
         return true
     }
 
     override fun query(uri: Uri, projection: Array<String>, selection: String, selectionArgs: Array<String>, sortOrder: String): Cursor {
         var localSortOrder = sortOrder
-        val db = mHelper!!.readableDatabase
+        val db = mHelper.readableDatabase
         val builder = SQLiteQueryBuilder()
         when (URI_MATCHER.match(uri)) {
             GAME_LIST -> {
@@ -67,7 +65,7 @@ class DragonContentProvider : ContentProvider() {
             throw IllegalArgumentException(
                     "Unsupported URI for insertion: " + uri)
         }
-        val db = mHelper!!.writableDatabase
+        val db = mHelper.writableDatabase
         val id = db.insert(
                 DbSchema.TBL_NAME, null,
                 values)
@@ -99,7 +97,7 @@ class DragonContentProvider : ContentProvider() {
     }
 
     override fun delete(uri: Uri, selection: String, selectionArgs: Array<String>): Int {
-        val db = mHelper!!.writableDatabase
+        val db = mHelper.writableDatabase
         var delCount: Int
         when (URI_MATCHER.match(uri)) {
             GAME_LIST -> delCount = db.delete(
@@ -127,7 +125,7 @@ class DragonContentProvider : ContentProvider() {
     }
 
     override fun update(uri: Uri, values: ContentValues, selection: String, selectionArgs: Array<String>): Int {
-        val db = mHelper!!.writableDatabase
+        val db = mHelper.writableDatabase
         val updateCount: Int
         when (URI_MATCHER.match(uri)) {
             GAME_LIST -> updateCount = db.update(

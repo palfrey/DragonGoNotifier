@@ -48,7 +48,7 @@ class DragonSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractThr
 
                 // Updating remote games
                 for (remoteGame in gamesToRemote) {
-                    Log.d(TAG, "Local -> Remote [" + remoteGame.opponent_handle + "]")
+                    Log.d(TAG, "Local -> Remote [$remoteGame]")
                     TODO("Sync game to remote")
                     //parseComService.putShow(authToken, userObjectId, remoteGame)
                 }
@@ -62,10 +62,10 @@ class DragonSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractThr
                 // Updating local games
                 val showsToLocalValues = arrayOfNulls<ContentValues>(gamesToLocal.size)
                 for ((i, localGame) in gamesToLocal.withIndex()) {
-                    Log.d(TAG, "Remote -> Local [" + localGame.opponent_handle + "]")
+                    Log.d(TAG, "Remote -> Local [$localGame]")
                     showsToLocalValues[i] = localGame.contentValues
                 }
-                provider.bulkInsert(DragonItemsContract.CONTENT_URI, showsToLocalValues)
+                provider.bulkInsert(DragonItemsContract.Games.CONTENT_URI, showsToLocalValues)
             }
 
             Log.d(TAG, "Finished")
