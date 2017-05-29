@@ -30,7 +30,7 @@ class DragonContentProviderTest {
     @Test
     fun testQuery() {
         for (uri in validUris) {
-            val cursor = mShadowContentResolver!!.query(uri, null, null, null, null)
+            val cursor = mShadowContentResolver!!.query(uri, emptyArray(), "", emptyArray(), "")
             assertNotNull(cursor)
             println(uri)
             println(cursor)

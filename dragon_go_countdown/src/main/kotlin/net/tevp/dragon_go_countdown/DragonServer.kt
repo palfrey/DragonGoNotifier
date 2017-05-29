@@ -34,14 +34,14 @@ object DragonServer {
         } else {
             val headerFields = conn.headerFields
             val COOKIES_HEADER = "Set-Cookie"
-            val cookiesHeader = headerFields[COOKIES_HEADER]
-            if (cookiesHeader != null) {
-                for (cookie in cookiesHeader) {
-                    val cookie = HttpCookie.parse(cookie)[0]
+            val cookiesHeaders = headerFields[COOKIES_HEADER]
+            if (cookiesHeaders != null) {
+                for (cookieHeader in cookiesHeaders) {
+                    val cookie = HttpCookie.parse(cookieHeader)[0]
                     if (cookie.name.contentEquals("cookie_sessioncode")) {
                         result.sessionCode = cookie.value
                         val expire = Calendar.getInstance()
-                        expire.add(Calendar.SECOND, cookie.maxAge as Int)
+                        expire.add(Calendar.SECOND, cookie.maxAge.toInt())
                         result.expiry = expire.time
                         result.status = LoginStatus.SUCCESS
                         break

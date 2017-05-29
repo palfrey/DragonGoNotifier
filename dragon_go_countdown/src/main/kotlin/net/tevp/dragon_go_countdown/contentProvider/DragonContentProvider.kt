@@ -22,14 +22,14 @@ class DragonContentProvider : ContentProvider() {
     }
 
     override fun query(uri: Uri, projection: Array<String>, selection: String, selectionArgs: Array<String>, sortOrder: String): Cursor {
-        var sortOrder = sortOrder
+        var localSortOrder = sortOrder
         val db = mHelper!!.readableDatabase
         val builder = SQLiteQueryBuilder()
         when (URI_MATCHER.match(uri)) {
             GAME_LIST -> {
                 builder.tables = DbSchema.TBL_NAME
                 if (TextUtils.isEmpty(sortOrder)) {
-                    sortOrder = Games.SORT_ORDER_DEFAULT
+                    localSortOrder = Games.SORT_ORDER_DEFAULT
                 }
             }
             GAME_ID -> {
@@ -46,7 +46,7 @@ class DragonContentProvider : ContentProvider() {
                 projection,
                 selection,
                 selectionArgs, null, null,
-                sortOrder)
+                localSortOrder)
         // if we want to be notified of any changes:
         cursor.setNotificationUri(
                 context.contentResolver,
@@ -100,7 +100,7 @@ class DragonContentProvider : ContentProvider() {
 
     override fun delete(uri: Uri, selection: String, selectionArgs: Array<String>): Int {
         val db = mHelper!!.writableDatabase
-        var delCount = 0
+        var delCount: Int
         when (URI_MATCHER.match(uri)) {
             GAME_LIST -> delCount = db.delete(
                     DbSchema.TBL_NAME,
