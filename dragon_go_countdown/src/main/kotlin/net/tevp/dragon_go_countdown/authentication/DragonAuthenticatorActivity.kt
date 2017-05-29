@@ -12,7 +12,6 @@ import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
@@ -179,19 +178,20 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
      * the user.
      */
     inner class UserLoginTask internal constructor(private val mUsername: String, private val mPassword: String) : AsyncTask<Void, Void, Intent>() {
-        private var loginResult: LoginResult? = null
-
         internal val accountType = intent.getStringExtra(ARG_ACCOUNT_TYPE)
 
         override fun doInBackground(vararg params: Void): Intent {
             val data = Bundle()
             try {
-                loginResult = DragonServer.Login(mUsername, mPassword)
-                if (loginResult!!.status == LoginStatus.SUCCESS) {
-                    data.putString(AccountManager.KEY_ACCOUNT_NAME, mUsername)
-                    data.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType)
-                    data.putString(AccountManager.KEY_AUTHTOKEN, loginResult!!.sessionCode)
-                    data.putString(PARAM_USER_PASS, mPassword)
+                val loginResult = DragonServer.Login(mUsername, mPassword)
+                data.putString(PARAM_STATUS_ENUM, loginResult.status.name)
+                if (loginResult.status == LoginStatus.SUCCESS) {
+                    data.run {
+                        putString(AccountManager.KEY_ACCOUNT_NAME, mUsername)
+                        putString(AccountManager.KEY_ACCOUNT_TYPE, accountType)
+                        putString(AccountManager.KEY_AUTHTOKEN, loginResult.sessionCode)
+                        putString(PARAM_USER_PASS, mPassword)
+                    }
                 }
             } catch (e: Exception) {
                 data.putString(KEY_ERROR_MESSAGE, e.message)
@@ -206,7 +206,8 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
             mAuthTask = null
             showProgress(false)
 
-            when (loginResult!!.status) {
+            val status = LoginStatus.valueOf(intent.getStringExtra(PARAM_STATUS_ENUM))
+            when (status) {
                 LoginStatus.BAD_PASSWORD -> {
                     mPasswordView.error = getString(R.string.error_incorrect_password)
                     mPasswordView.requestFocus()
@@ -215,13 +216,13 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
                     mUsernameView.error = getString(R.string.error_invalid_username)
                     mUsernameView.requestFocus()
                 }
-                LoginStatus.OTHER_ERROR -> {
+                LoginStatus.SUCCESS -> finishLogin(intent)
+                else -> {
                     if (intent.hasExtra(KEY_ERROR_MESSAGE)) {
                         Toast.makeText(baseContext, intent.getStringExtra(KEY_ERROR_MESSAGE), Toast.LENGTH_SHORT).show()
                     }
                     mUsernameView.error = "Some other problems"
                 }
-                LoginStatus.SUCCESS -> finishLogin(intent)
             }
         }
 
@@ -237,6 +238,7 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
         val ARG_ACCOUNT_NAME = "ACCOUNT_NAME"
         val ARG_IS_ADDING_NEW_ACCOUNT = "IS_ADDING_ACCOUNT"
         val PARAM_USER_PASS = "USER_PASS"
+        val PARAM_STATUS_ENUM = "STATUS_ENUM"
         val KEY_ERROR_MESSAGE = "ERR_MSG"
         val ACCOUNT_TYPE = "net.tevp.dragon_go_countdown"
         val AUTHTOKEN_TYPE_FULL_ACCESS = "Full access"

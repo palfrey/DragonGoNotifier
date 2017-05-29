@@ -16,11 +16,12 @@ object DragonServer {
     @Throws(IOException::class)
     fun Login(username: String, password: String): LoginResult {
         val url = URL("http://www.dragongoserver.net/login.php?quick_mode=1&userid=$username&passwd=$password")
+        Log.d("DragonServer", "Url: $url")
         val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
         val inStream = BufferedInputStream(conn.inputStream)
         val content = toString(inStream, "UTF-8")
         val result = LoginResult()
-        Log.d("DragonServer", content)
+        Log.d("DragonServer", "Content: $content")
         if (content.contains("#Error")) {
             if (content.contains("wrong_userid")) {
                 result.status = LoginStatus.BAD_USERNAME
@@ -49,10 +50,11 @@ object DragonServer {
                 }
             }
         }
+        Log.d("DragonServer", "Status: ${result.status}")
         return result
     }
 
     fun getGames(authToken: String): List<Game> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented: $authToken")
     }
 }

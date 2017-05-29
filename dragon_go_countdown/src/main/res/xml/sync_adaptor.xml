@@ -5,5 +5,5 @@
     android:accountType="net.tevp.dragon_go_countdown"
     android:userVisible="true"
     android:allowParallelSyncs="false"
-    android:isAlwaysSyncable="false"
+    android:isAlwaysSyncable="true"
     android:supportsUploading="true"/>

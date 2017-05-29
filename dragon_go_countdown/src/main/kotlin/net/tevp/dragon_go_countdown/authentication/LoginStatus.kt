@@ -4,5 +4,6 @@ enum class LoginStatus {
     SUCCESS,
     BAD_USERNAME,
     BAD_PASSWORD,
-    OTHER_ERROR
+    OTHER_ERROR,
+    UNKNOWN
 }
