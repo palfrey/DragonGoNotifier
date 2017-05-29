@@ -1,2 +1,3 @@
 https://udinic.wordpress.com/2013/04/24/write-your-own-android-authenticator/
+http://blog.udinic.com/2013/07/24/write-your-own-android-sync-adapter
 https://github.com/Udinic/SyncAdapter

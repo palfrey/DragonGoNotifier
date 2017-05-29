@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import net.tevp.dragon_go_countdown.DragonServer
 
 import java.io.IOException
 
@@ -50,12 +51,11 @@ class DragonAccountAuthenticator(private val mContext: Context) : AbstractAccoun
             val password = am.getPassword(account)
             if (password != null) {
                 try {
-                    loginResult = DragonLogin.Login(account.name, password)
+                    loginResult = DragonServer.Login(account.name, password)
                     authToken = loginResult.sessionCode
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
-
             }
         }
 

@@ -18,6 +18,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import net.tevp.dragon_go_countdown.DragonServer
 import net.tevp.dragon_go_countdown.R
 
 /**
@@ -57,7 +58,7 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
         }
 
         mPasswordView = findViewById(R.id.password) as EditText
-        mPasswordView!!.setOnEditorActionListener(TextView.OnEditorActionListener { textView, id, keyEvent ->
+        mPasswordView!!.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
             if (id == R.id.login || id == EditorInfo.IME_NULL) {
                 attemptLogin()
                 return@OnEditorActionListener true
@@ -188,7 +189,7 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
         override fun doInBackground(vararg params: Void): Intent {
             val data = Bundle()
             try {
-                loginResult = DragonLogin.Login(mUsername, mPassword)
+                loginResult = DragonServer.Login(mUsername, mPassword)
                 if (loginResult!!.status == LoginStatus.SUCCESS) {
                     data.putString(AccountManager.KEY_ACCOUNT_NAME, mUsername)
                     data.putString(AccountManager.KEY_ACCOUNT_TYPE, accountType)
@@ -235,7 +236,6 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
     }
 
     companion object {
-
         val ARG_ACCOUNT_TYPE = "ACCOUNT_TYPE"
         val ARG_AUTH_TYPE = "AUTH_TYPE"
         val ARG_ACCOUNT_NAME = "ACCOUNT_NAME"

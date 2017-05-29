@@ -27,13 +27,13 @@ class DragonContentProvider : ContentProvider() {
         val builder = SQLiteQueryBuilder()
         when (URI_MATCHER.match(uri)) {
             GAME_LIST -> {
-                builder.tables = DbSchema.TBL_GAMES
+                builder.tables = DbSchema.TBL_NAME
                 if (TextUtils.isEmpty(sortOrder)) {
                     sortOrder = Games.SORT_ORDER_DEFAULT
                 }
             }
             GAME_ID -> {
-                builder.tables = DbSchema.TBL_GAMES
+                builder.tables = DbSchema.TBL_NAME
                 // limit query to one row at most:
                 builder.appendWhere(Games._ID + " = " +
                         uri.lastPathSegment)
@@ -69,7 +69,7 @@ class DragonContentProvider : ContentProvider() {
         }
         val db = mHelper!!.writableDatabase
         val id = db.insert(
-                DbSchema.TBL_GAMES, null,
+                DbSchema.TBL_NAME, null,
                 values)
         try {
             return getUriForId(id, uri)
@@ -103,7 +103,7 @@ class DragonContentProvider : ContentProvider() {
         var delCount = 0
         when (URI_MATCHER.match(uri)) {
             GAME_LIST -> delCount = db.delete(
-                    DbSchema.TBL_GAMES,
+                    DbSchema.TBL_NAME,
                     selection,
                     selectionArgs)
             GAME_ID -> {
@@ -113,7 +113,7 @@ class DragonContentProvider : ContentProvider() {
                     where += " AND " + selection
                 }
                 delCount = db.delete(
-                        DbSchema.TBL_GAMES,
+                        DbSchema.TBL_NAME,
                         where,
                         selectionArgs)
             }
@@ -131,7 +131,7 @@ class DragonContentProvider : ContentProvider() {
         val updateCount: Int
         when (URI_MATCHER.match(uri)) {
             GAME_LIST -> updateCount = db.update(
-                    DbSchema.TBL_GAMES,
+                    DbSchema.TBL_NAME,
                     values,
                     selection,
                     selectionArgs)
@@ -142,7 +142,7 @@ class DragonContentProvider : ContentProvider() {
                     where += " AND " + selection
                 }
                 updateCount = db.update(
-                        DbSchema.TBL_GAMES,
+                        DbSchema.TBL_NAME,
                         values,
                         where,
                         selectionArgs)
