@@ -15,13 +15,14 @@ import java.util.*
 object DragonServer {
     @Throws(IOException::class)
     fun Login(username: String, password: String): LoginResult {
+        val TAG = "DragonServer::Login"
         val url = URL("http://www.dragongoserver.net/login.php?quick_mode=1&userid=$username&passwd=$password")
-        Log.d("DragonServer", "Url: $url")
+        Log.d(TAG, "Url: $url")
         val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
         val inStream = BufferedInputStream(conn.inputStream)
         val content = toString(inStream, "UTF-8")
         val result = LoginResult()
-        Log.d("DragonServer", "Content: $content")
+        Log.d(TAG, "Content: $content")
         if (content.contains("#Error")) {
             if (content.contains("wrong_userid")) {
                 result.status = LoginStatus.BAD_USERNAME
@@ -34,8 +35,7 @@ object DragonServer {
             result.status = LoginStatus.OTHER_ERROR
         } else {
             val headerFields = conn.headerFields
-            val COOKIES_HEADER = "Set-Cookie"
-            val cookiesHeaders = headerFields[COOKIES_HEADER]
+            val cookiesHeaders = headerFields["Set-Cookie"]
             if (cookiesHeaders != null) {
                 for (cookieHeader in cookiesHeaders) {
                     val cookie = HttpCookie.parse(cookieHeader)[0]
@@ -54,7 +54,15 @@ object DragonServer {
         return result
     }
 
-    fun getGames(authToken: String): List<Game> {
-        TODO("not implemented: $authToken")
+    fun getGames(accountName: String, authToken: String): List<Game> {
+        val TAG = "DragonServer::getGames"
+        var url = URL("http://www.dragongoserver.net/quick_status.php?version=2&order=0")
+        val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+        conn.setRequestProperty("Cookie", "cookie_handle=$accountName; cookie_sessioncode=$authToken")
+        Log.d(TAG, "Cookie: ${conn.getRequestProperty("Cookie")}")
+        val inStream = BufferedInputStream(conn.inputStream)
+        val content = toString(inStream, "UTF-8")
+        Log.d(TAG, "Content: $content")
+        return emptyList()
     }
 }
