@@ -4,9 +4,9 @@ object DbSchema {
     val DB_NAME = "dragonitems.db"
 
     const val TBL_NAME = "games"
-    const val COL_ID = "id"
-    const val COL_OPPONENT_HANDLE = "opponent_handle"
-    const val COL_END_TIME = "end_time"
+    const val COL_ID = DragonItemsContract.Games._ID
+    const val COL_OPPONENT_HANDLE = DragonItemsContract.Games.OPPONENT_HANDLE
+    const val COL_END_TIME = DragonItemsContract.Games.END_TIME
 
     val DDL_CREATE_TBL_GAMES = "CREATE TABLE $TBL_NAME (" +
             "$COL_ID           INTEGER  PRIMARY KEY, \n" +
