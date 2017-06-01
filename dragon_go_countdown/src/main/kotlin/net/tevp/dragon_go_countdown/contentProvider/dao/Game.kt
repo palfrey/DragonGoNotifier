@@ -17,6 +17,10 @@ class Game(var game_id: Int, var opponent_handle: String, var end_time: Date) : 
             return values
         }
 
+    override fun toString(): String {
+        return "Game[ID: $game_id, Opponent: $opponent_handle, End time: $end_time]"
+    }
+
     companion object {
         fun fromCursor(curGames: Cursor): Game {
             val game_id = curGames.getInt(curGames.getColumnIndex(DbSchema.COL_ID))
