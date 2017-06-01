@@ -2,7 +2,10 @@ package net.tevp.dragon_go_countdown.sync
 
 import android.accounts.Account
 import android.accounts.AccountManager
-import android.content.*
+import android.content.AbstractThreadedSyncAdapter
+import android.content.ContentProviderClient
+import android.content.Context
+import android.content.SyncResult
 import android.os.Bundle
 import android.util.Log
 import net.tevp.dragon_go_countdown.DragonServer
@@ -29,43 +32,44 @@ class DragonSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractThr
                 curGames.close()
             }
 
-            val gamesToRemote = ArrayList<Game>()
+            val localGamesToRemove = ArrayList<Game>()
             for (localGame in localGames) {
                 if (!remoteGames.contains(localGame))
-                    gamesToRemote.add(localGame)
+                    localGamesToRemove.add(localGame)
             }
 
-            val gamesToLocal = ArrayList<Game>()
-            for (remoteGame in remoteGames) {
-                if (!localGames.contains(remoteGame))
-                    gamesToLocal.add(remoteGame)
-            }
+            Log.d(TAG, "Updating remote server with local changes")
 
-            if (gamesToRemote.isEmpty()) {
-                Log.d(TAG, "No local changes to update server")
-            } else {
-                Log.d(TAG, "Updating remote server with local changes")
-
-                // Updating remote games
-                for (remoteGame in gamesToRemote) {
-                    Log.d(TAG, "Local -> Remote [$remoteGame]")
+            // Updating remote games
+            for (localGame in localGames) {
+                if (localGame.hasChanges()) {
+                    Log.d(TAG, "Local -> Remote [$localGame]")
                     TODO("Sync game to remote")
-                    //parseComService.putShow(authToken, userObjectId, remoteGame)
+                }
+                else
+                    Log.d(TAG, "$localGame has no changes")
+            }
+
+            Log.d(TAG, "Updating local database with remote changes")
+
+            // Updating local games
+            for (remoteGame in remoteGames) {
+                if (remoteGame in localGames) {
+                    Log.d(TAG, "Remote -> Local update [$remoteGame]")
+                    provider.update(remoteGame.contentUri, remoteGame.contentValues, "", emptyArray())
+                    syncResult.stats.numUpdates ++
+                }
+                else {
+                    Log.d(TAG, "Remote -> Local insert [$remoteGame]")
+                    provider.insert(remoteGame.contentUri, remoteGame.contentValues)
+                    syncResult.stats.numInserts ++
                 }
             }
 
-            if (gamesToLocal.isEmpty()) {
-                Log.d(TAG, "No server changes to update local database")
-            } else {
-                Log.d(TAG, "Updating local database with remote changes")
-
-                // Updating local games
-                val showsToLocalValues = arrayOfNulls<ContentValues>(gamesToLocal.size)
-                for ((i, localGame) in gamesToLocal.withIndex()) {
-                    Log.d(TAG, "Remote -> Local [$localGame]")
-                    showsToLocalValues[i] = localGame.contentValues
-                }
-                provider.bulkInsert(DragonItemsContract.Games.CONTENT_URI, showsToLocalValues)
+            for (localGame in localGamesToRemove) {
+                Log.d(TAG, "Removing $localGame from local storage")
+                provider.delete(localGame.contentUri, "", emptyArray())
+                syncResult.stats.numDeletes ++
             }
 
             Log.d(TAG, "Finished")
