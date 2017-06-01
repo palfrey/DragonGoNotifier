@@ -61,7 +61,7 @@ class DragonSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractThr
                 }
                 else {
                     Log.d(TAG, "Remote -> Local insert [$remoteGame]")
-                    provider.insert(remoteGame.contentUri, remoteGame.contentValues)
+                    provider.insert(DragonItemsContract.Games.CONTENT_URI, remoteGame.contentValues)
                     syncResult.stats.numInserts ++
                 }
             }
