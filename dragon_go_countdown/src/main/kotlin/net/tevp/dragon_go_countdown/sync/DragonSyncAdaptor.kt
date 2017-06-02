@@ -64,11 +64,13 @@ class DragonSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractThr
                     provider.insert(DragonItemsContract.Games.CONTENT_URI, remoteGame.contentValues)
                     syncResult.stats.numInserts ++
                 }
+                context.contentResolver.notifyChange(remoteGame.contentUri, null, false)
             }
 
             for (localGame in localGamesToRemove) {
                 Log.d(TAG, "Removing $localGame from local storage")
                 provider.delete(localGame.contentUri, "", emptyArray())
+                context.contentResolver.notifyChange(localGame.contentUri, null, false)
                 syncResult.stats.numDeletes ++
             }
 
