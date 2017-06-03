@@ -36,7 +36,7 @@ class DragonWidgetProvider : AppWidgetProvider() {
             display = "${days}d"
         }
         else {
-            display = "{$hours}h"
+            display = "${hours}h"
         }
 
         // initializing widget layout
