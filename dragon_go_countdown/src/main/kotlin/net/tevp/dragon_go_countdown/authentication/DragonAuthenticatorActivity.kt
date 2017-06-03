@@ -22,7 +22,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import net.tevp.dragon_go_countdown.DragonServer
 import net.tevp.dragon_go_countdown.R
-import net.tevp.dragon_go_countdown.contentProvider.DragonItemsContract.AUTHORITY
+import net.tevp.dragon_go_countdown.contentProvider.DragonItemsContract
 
 /**
  * A login screen that offers login via username/password.
@@ -166,9 +166,9 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
             // (Not setting the auth token will cause another call to the server to authenticate the user)
             mAccountManager!!.addAccountExplicitly(account, accountPassword, intent.getBundleExtra(AccountManager.KEY_USERDATA))
             mAccountManager!!.setAuthToken(account, authtokenType, authtoken)
-            ContentResolver.setIsSyncable(account, AUTHORITY, 1)
-            ContentResolver.setSyncAutomatically(account, AUTHORITY, true)
-            ContentResolver.addPeriodicSync(account, AUTHORITY, Bundle.EMPTY, 60*60)
+            ContentResolver.setIsSyncable(account, DragonItemsContract.AUTHORITY, 1)
+            ContentResolver.setSyncAutomatically(account, DragonItemsContract.AUTHORITY, true)
+            ContentResolver.addPeriodicSync(account, DragonItemsContract.AUTHORITY, Bundle.EMPTY, 60*60)
         } else {
             mAccountManager!!.setPassword(account, accountPassword)
         }
