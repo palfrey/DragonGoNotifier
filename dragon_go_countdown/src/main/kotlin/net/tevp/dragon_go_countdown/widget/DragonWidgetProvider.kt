@@ -1,13 +1,18 @@
-package net.tevp.dragon_go_countdown
+package net.tevp.dragon_go_countdown.widget
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.util.Log
 import android.widget.RemoteViews
+import net.tevp.dragon_go_countdown.R
 
 class DragonWidgetProvider : AppWidgetProvider() {
+    private val TAG = "DragonWidgetProvider"
+
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
+        Log.d(TAG, "widget update")
 
         // initializing widget layout
         val views = RemoteViews(context.packageName, R.layout.widget)
