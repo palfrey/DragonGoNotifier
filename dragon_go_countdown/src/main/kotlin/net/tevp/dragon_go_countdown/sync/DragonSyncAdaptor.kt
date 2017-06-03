@@ -54,6 +54,7 @@ class DragonSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractThr
 
             // Updating local games
             for (remoteGame in remoteGames) {
+                syncResult.stats.numEntries++
                 if (remoteGame in localGames) {
                     Log.d(TAG, "Remote -> Local update [$remoteGame]")
                     provider.update(remoteGame.contentUri, remoteGame.contentValues, "", emptyArray())
@@ -74,6 +75,7 @@ class DragonSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractThr
                 syncResult.stats.numDeletes ++
             }
 
+            Log.d(TAG, syncResult.stats.toString())
             Log.d(TAG, "Finished")
 
         } catch (e: Exception) {
