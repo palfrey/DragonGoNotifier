@@ -35,8 +35,11 @@ class DragonWidgetProvider : AppWidgetProvider() {
         if (days > 0) {
             display = "${days}d"
         }
-        else {
+        else if (hours > 0) {
             display = "${hours}h"
+        }
+        else {
+            display = "n/a"
         }
 
         // initializing widget layout
