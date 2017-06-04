@@ -3,6 +3,7 @@ package net.tevp.dragon_go_countdown.widget
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.widget.RemoteViews
 import net.tevp.dragon_go_countdown.R
@@ -12,6 +13,14 @@ import java.util.*
 
 class DragonWidgetProvider : AppWidgetProvider() {
     private val TAG = "DragonWidgetProvider"
+
+    override fun onEnabled(context: Context) {
+        context.startService(Intent(context, DragonWidgetUpdaterService::class.java))
+    }
+
+    override fun onDisabled(context: Context) {
+        context.stopService(Intent(context, DragonWidgetUpdaterService::class.java))
+    }
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
@@ -45,13 +54,15 @@ class DragonWidgetProvider : AppWidgetProvider() {
         }
 
         // initializing widget layout
-        val views = RemoteViews(context.packageName, R.layout.widget)
-        views.setTextViewText(R.id.nextMove, display)
-        views.setTextViewText(R.id.allMoves, "${games}")
+        val views = RemoteViews(context.packageName, R.layout.widget).apply {
+            setTextViewText(R.id.nextMove, display)
+            setTextViewText(R.id.allMoves, "$games")
+        }
         if (days > 0)
             views.setInt(R.id.widgetBackground, "setBackgroundResource", R.drawable.widget_back_green)
         else
             views.setInt(R.id.widgetBackground, "setBackgroundResource", R.drawable.widget_back_red)
         appWidgetManager.updateAppWidget(appWidgetIds[0], views)
     }
+
 }

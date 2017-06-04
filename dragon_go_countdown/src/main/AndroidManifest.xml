@@ -64,6 +64,10 @@
             android:label="@string/sync_type"
             android:readPermission="net.tevp.dragon_go_countdown.READ"
             android:writePermission="net.tevp.dragon_go_countdown.WRITE" />
+
+        <service
+            android:name=".widget.DragonWidgetUpdaterService"
+            android:exported="false"/>
     </application>
 
 </manifest>
