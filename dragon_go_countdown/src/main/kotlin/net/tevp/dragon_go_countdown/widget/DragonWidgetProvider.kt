@@ -19,8 +19,10 @@ class DragonWidgetProvider : AppWidgetProvider() {
         val cursor = context.contentResolver.query(
                 DragonItemsContract.Games.CONTENT_URI, emptyArray(), "", emptyArray(), "")
         var end_time = Date()
+        var games = 0
         while (cursor.moveToNext()) {
             val game = Game.fromCursor(cursor)
+            games++
             if (game.end_time > end_time) {
                 end_time = game.end_time
             }
@@ -45,6 +47,7 @@ class DragonWidgetProvider : AppWidgetProvider() {
         // initializing widget layout
         val views = RemoteViews(context.packageName, R.layout.widget)
         views.setTextViewText(R.id.nextMove, display)
+        views.setTextViewText(R.id.allMoves, "${games}")
         if (days > 0)
             views.setInt(R.id.widgetBackground, "setBackgroundResource", R.drawable.widget_back_green)
         else
