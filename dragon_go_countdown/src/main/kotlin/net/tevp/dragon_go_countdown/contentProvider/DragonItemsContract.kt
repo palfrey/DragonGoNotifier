@@ -13,6 +13,7 @@ object DragonItemsContract {
             const val _ID: String = BaseColumns._ID
             const val OPPONENT_HANDLE = "OPPONENT_HANDLE"
             const val END_TIME = "END_TIME"
+            const val USERNAME = "USERNAME"
 
             /**
              * The content URI for this table.
@@ -27,7 +28,7 @@ object DragonItemsContract {
              */
             val CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.net.tevp.dragon_go_countdown.games"
 
-            val SORT_ORDER_DEFAULT = BaseColumns._ID + " ASC"
+            val SORT_ORDER_DEFAULT = _ID + " ASC"
         }
     }
 

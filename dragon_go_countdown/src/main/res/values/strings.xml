@@ -3,4 +3,7 @@
     <string name="app_name">Dragon Go countdown</string>
     <string name="account_type">Dragon Go server</string>
     <string name="sync_type">Dragon Go Games</string>
+    <string name="account">Account</string>
+    <string name="save">Save</string>
+    <string name="add_account">Add account</string>
 </resources>

@@ -57,14 +57,14 @@ object DragonServer {
 
     fun getGames(accountName: String, authToken: String): List<Game> {
         val TAG = "DragonServer::getGames"
-        var url = URL("http://www.dragongoserver.net/quick_status.php?version=2&order=0")
+        val url = URL("http://www.dragongoserver.net/quick_status.php?version=2&order=0")
         val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
         conn.setRequestProperty("Cookie", "cookie_handle=$accountName; cookie_sessioncode=$authToken")
         Log.d(TAG, "Cookie: ${conn.getRequestProperty("Cookie")}")
         val inStream = BufferedInputStream(conn.inputStream)
         val content = toString(inStream, "UTF-8")
         Log.d(TAG, "Content: $content")
-        var items = Vector<Game>()
+        val items = Vector<Game>()
         val csvFormat = org.apache.commons.csv.CSVFormat.DEFAULT.withHeader("G", "game_id", "opponent_handle", "player_color", "lastmove_date", "time_remaining", "game_action", "game_status", "move_id", "tournament_id", "shape_id", "game_type", "game_prio", "opponent_lastaccess_date", "handicap")
         for (line: String in content.split("\n")) {
             if (!line.startsWith("G,")) {
@@ -90,7 +90,7 @@ object DragonServer {
                     cal.time
                 }
                 if (end_time != null) {
-                    var game = Game(record.get("game_id").toInt(), record.get("opponent_handle"), end_time)
+                    val game = Game(record.get("game_id").toInt(), accountName, record.get("opponent_handle"), end_time)
                     items.add(game)
                 }
             }

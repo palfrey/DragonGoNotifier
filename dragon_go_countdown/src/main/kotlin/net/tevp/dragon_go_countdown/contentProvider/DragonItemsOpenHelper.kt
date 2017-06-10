@@ -3,10 +3,13 @@ package net.tevp.dragon_go_countdown.contentProvider
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 
 class DragonItemsOpenHelper(context: Context) : SQLiteOpenHelper(context, DragonItemsOpenHelper.NAME, null, DragonItemsOpenHelper.VERSION) {
+    val TAG = "DragonItemsOpenHelper";
 
     override fun onCreate(db: SQLiteDatabase) {
+        Log.d(TAG, "Making db: ${DbSchema.DDL_CREATE_TBL_GAMES}")
         db.execSQL(DbSchema.DDL_CREATE_TBL_GAMES)
     }
 

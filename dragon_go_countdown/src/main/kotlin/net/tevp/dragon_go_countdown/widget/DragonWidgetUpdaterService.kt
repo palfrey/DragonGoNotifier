@@ -19,7 +19,7 @@ class DragonWidgetUpdaterService : Service() {
     private val binder = Binder()
     private val feedUpdater = FeedUpdater(Handler(), this)
 
-    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         contentResolver.registerContentObserver(DragonItemsContract.Games.CONTENT_URI, true, feedUpdater)
         return Service.START_STICKY
     }

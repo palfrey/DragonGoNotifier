@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.util.Log
 import net.tevp.dragon_go_countdown.DragonServer
 import net.tevp.dragon_go_countdown.authentication.DragonAuthenticatorActivity
+import net.tevp.dragon_go_countdown.contentProvider.DbSchema
 import net.tevp.dragon_go_countdown.contentProvider.DragonItemsContract
 import net.tevp.dragon_go_countdown.contentProvider.dao.Game
 
@@ -24,7 +25,7 @@ class DragonSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractThr
             val authToken = mAccountManager.blockingGetAuthToken(account, DragonAuthenticatorActivity.AUTHTOKEN_TYPE_FULL_ACCESS, true)
             val remoteGames = DragonServer.getGames(account.name, authToken)
             val localGames: ArrayList<Game> = ArrayList()
-            val curGames = provider.query(DragonItemsContract.Games.CONTENT_URI, emptyArray(), "", emptyArray(), "")
+            val curGames = provider.query(DragonItemsContract.Games.CONTENT_URI, emptyArray(), "${DbSchema.COL_USERNAME} = ?", arrayOf(account.name), "")
             if (curGames != null) {
                 while (curGames.moveToNext()) {
                     localGames.add(Game.fromCursor(curGames))
