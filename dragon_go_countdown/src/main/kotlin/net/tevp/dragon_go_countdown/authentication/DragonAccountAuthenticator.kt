@@ -21,7 +21,7 @@ class DragonAccountAuthenticator(private val mContext: Context) : AbstractAccoun
                             authTokenType: String?,
                             requiredFeatures: Array<String>?,
                             options: Bundle?): Bundle? {
-    val intent = Intent(mContext, DragonAuthenticatorActivity::class.java)
+        val intent = Intent(mContext, DragonAuthenticatorActivity::class.java)
         intent.putExtra(DragonAuthenticatorActivity.ARG_ACCOUNT_TYPE, accountType)
         intent.putExtra(DragonAuthenticatorActivity.ARG_AUTH_TYPE, authTokenType)
         intent.putExtra(DragonAuthenticatorActivity.ARG_IS_ADDING_NEW_ACCOUNT, true)

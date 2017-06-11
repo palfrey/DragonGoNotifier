@@ -38,7 +38,7 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
     @BindView(R.id.password) lateinit var mPasswordView: EditText
     @BindView(R.id.login_progress) lateinit var mProgressView: View
     @BindView(R.id.login_form) lateinit var mLoginFormView: View
-    private var mAccountManager: AccountManager? = null
+    lateinit private var mAccountManager: AccountManager
     private var mAuthTokenType: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -164,13 +164,13 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
 
             // Creating the account on the device and setting the auth token we got
             // (Not setting the auth token will cause another call to the server to authenticate the user)
-            mAccountManager!!.addAccountExplicitly(account, accountPassword, intent.getBundleExtra(AccountManager.KEY_USERDATA))
-            mAccountManager!!.setAuthToken(account, authtokenType, authtoken)
+            mAccountManager.addAccountExplicitly(account, accountPassword, intent.getBundleExtra(AccountManager.KEY_USERDATA))
+            mAccountManager.setAuthToken(account, authtokenType, authtoken)
             ContentResolver.setIsSyncable(account, DragonItemsContract.AUTHORITY, 1)
             ContentResolver.setSyncAutomatically(account, DragonItemsContract.AUTHORITY, true)
             ContentResolver.addPeriodicSync(account, DragonItemsContract.AUTHORITY, Bundle.EMPTY, 60*60)
         } else {
-            mAccountManager!!.setPassword(account, accountPassword)
+            mAccountManager.setPassword(account, accountPassword)
         }
 
         setAccountAuthenticatorResult(intent.extras)
