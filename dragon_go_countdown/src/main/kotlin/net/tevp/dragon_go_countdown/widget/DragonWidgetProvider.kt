@@ -1,9 +1,11 @@
 package net.tevp.dragon_go_countdown.widget
 
+import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import android.widget.RemoteViews
 import net.tevp.dragon_go_countdown.R
@@ -101,6 +103,11 @@ class DragonWidgetProvider : AppWidgetProvider() {
                 views.setInt(R.id.widgetBackground, "setBackgroundResource", R.drawable.widget_back_green)
             else
                 views.setInt(R.id.widgetBackground, "setBackgroundResource", R.drawable.widget_back_red)
+
+            val launchDragonIntent = Intent(Intent.ACTION_VIEW).setData(Uri.parse("http://www.dragongoserver.net/status.php"))
+            val pendingIntent = PendingIntent.getActivity(context, 0, launchDragonIntent, 0)
+            views.setOnClickPendingIntent(R.id.widgetLayout, pendingIntent)
+
             appWidgetManager.updateAppWidget(widget_id, views)
         }
     }
