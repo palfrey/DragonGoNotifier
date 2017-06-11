@@ -1,46 +1,46 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
-    <TableRow
+    <TextView
+        android:text="@string/configure_widget"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="horizontal">
 
         <TextView
             android:text="@string/account"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+            android:layout_height="wrap_content" />
 
         <Spinner
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/accountsList" />
+            android:id="@+id/accountsList"
+            android:layout_width="wrap_content" />
+    </LinearLayout>
 
         <Button
             android:text="@string/add_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/openAccountsButton"
-            android:onClick="addAccount" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
+            android:onClick="addAccount"
+            android:layout_gravity="left" />
+        
         <Button
             android:text="@string/save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/saveButton"
-            android:onClick="saveSettings"/>
-    </TableRow>
-</TableLayout>
-
+            android:onClick="saveSettings"
+            android:layout_gravity="left" />
+</LinearLayout>

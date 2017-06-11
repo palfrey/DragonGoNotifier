@@ -6,4 +6,8 @@
     <string name="account">Account</string>
     <string name="save">Save</string>
     <string name="add_account">Add account</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="dragon_go_server_login">Dragon Go Server Login</string>
+    <string name="configure_widget">Configure widget</string>
 </resources>
