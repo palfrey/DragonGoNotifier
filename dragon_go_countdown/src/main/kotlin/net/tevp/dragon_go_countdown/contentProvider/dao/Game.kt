@@ -13,10 +13,10 @@ class Game(var game_id: Int, var username: String, var opponent_handle: String, 
     val contentValues: ContentValues
         get() {
             val values = ContentValues()
-            values.put(DbSchema.COL_ID, game_id)
-            values.put(DbSchema.COL_USERNAME, username)
-            values.put(DbSchema.COL_OPPONENT_HANDLE, opponent_handle)
-            values.put(DbSchema.COL_END_TIME, end_time.time)
+            values.put(DbSchema.Games.COL_ID, game_id)
+            values.put(DbSchema.Games.COL_USERNAME, username)
+            values.put(DbSchema.Games.COL_OPPONENT_HANDLE, opponent_handle)
+            values.put(DbSchema.Games.COL_END_TIME, end_time.time)
             return values
         }
 
@@ -39,12 +39,20 @@ class Game(var game_id: Int, var username: String, var opponent_handle: String, 
         return super.equals(other)
     }
 
+    override fun hashCode(): Int{
+        var result = game_id
+        result = 31 * result + username.hashCode()
+        result = 31 * result + opponent_handle.hashCode()
+        result = 31 * result + end_time.hashCode()
+        return result
+    }
+
     companion object {
         fun fromCursor(curGames: Cursor): Game {
-            val game_id = curGames.getInt(curGames.getColumnIndex(DbSchema.COL_ID))
-            val username = curGames.getString(curGames.getColumnIndex(DbSchema.COL_USERNAME))
-            val opponent_handle = curGames.getString(curGames.getColumnIndex(DbSchema.COL_OPPONENT_HANDLE))
-            val end_time_raw = curGames.getLong(curGames.getColumnIndex(DbSchema.COL_END_TIME))
+            val game_id = curGames.getInt(curGames.getColumnIndex(DbSchema.Games.COL_ID))
+            val username = curGames.getString(curGames.getColumnIndex(DbSchema.Games.COL_USERNAME))
+            val opponent_handle = curGames.getString(curGames.getColumnIndex(DbSchema.Games.COL_OPPONENT_HANDLE))
+            val end_time_raw = curGames.getLong(curGames.getColumnIndex(DbSchema.Games.COL_END_TIME))
 
             return Game(game_id, username, opponent_handle, Date(end_time_raw))
         }

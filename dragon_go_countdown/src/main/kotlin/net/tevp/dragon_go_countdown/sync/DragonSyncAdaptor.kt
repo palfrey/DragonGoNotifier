@@ -25,7 +25,7 @@ class DragonSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractThr
             val authToken = mAccountManager.blockingGetAuthToken(account, DragonAuthenticatorActivity.AUTHTOKEN_TYPE_FULL_ACCESS, true)
             val remoteGames = DragonServer.getGames(account.name, authToken)
             val localGames: ArrayList<Game> = ArrayList()
-            val curGames = provider.query(DragonItemsContract.Games.CONTENT_URI, emptyArray(), "${DbSchema.COL_USERNAME} = ?", arrayOf(account.name), "")
+            val curGames = provider.query(DragonItemsContract.Games.CONTENT_URI, emptyArray(), "${DbSchema.Games.COL_USERNAME} = ?", arrayOf(account.name), "")
             if (curGames != null) {
                 while (curGames.moveToNext()) {
                     localGames.add(Game.fromCursor(curGames))

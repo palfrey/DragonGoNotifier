@@ -9,12 +9,11 @@ import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.RemoteViews
 import android.widget.Spinner
 import butterknife.BindView
 import butterknife.ButterKnife
 import net.tevp.dragon_go_countdown.R
-import net.tevp.dragon_go_countdown.contentProvider.DragonItemsContract
+import net.tevp.dragon_go_countdown.authentication.DragonAuthenticatorActivity
 
 class DragonWidgetConfigure : Activity() {
     @BindView(R.id.accountsList) lateinit var mAccountsList: Spinner
@@ -25,7 +24,7 @@ class DragonWidgetConfigure : Activity() {
 
     private fun setAccounts() {
         adapter.clear()
-        for (a in AccountManager.get(baseContext).getAccountsByType(DragonItemsContract.AUTHORITY)) {
+        for (a in AccountManager.get(baseContext).getAccountsByType(DragonAuthenticatorActivity.ACCOUNT_TYPE)) {
             Log.d(TAG, "Account: $a")
             adapter.add(a.name)
         }
@@ -66,11 +65,9 @@ class DragonWidgetConfigure : Activity() {
 
     fun saveSettings(@Suppress("UNUSED_PARAMETER") view: View) {
         val appWidgetManager = AppWidgetManager.getInstance(baseContext)
-        val views = RemoteViews(baseContext.packageName, R.layout.widget)
-        appWidgetManager.updateAppWidget(mAppWidgetId, views)
-
         val options = Bundle()
-        options.putString(DragonWidgetContract.USERNAME, mAccountsList.selectedItem as String)
+        val username = mAccountsList.selectedItem as String
+        options.putString(DragonWidgetContract.USERNAME, username)
         appWidgetManager.updateAppWidgetOptions(mAppWidgetId, options)
 
         val updateIntent = Intent(this.applicationContext,

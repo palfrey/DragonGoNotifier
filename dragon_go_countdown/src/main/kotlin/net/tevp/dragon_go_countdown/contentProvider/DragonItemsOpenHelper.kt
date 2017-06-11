@@ -3,14 +3,13 @@ package net.tevp.dragon_go_countdown.contentProvider
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
 
 class DragonItemsOpenHelper(context: Context) : SQLiteOpenHelper(context, DragonItemsOpenHelper.NAME, null, DragonItemsOpenHelper.VERSION) {
     val TAG = "DragonItemsOpenHelper";
 
     override fun onCreate(db: SQLiteDatabase) {
-        Log.d(TAG, "Making db: ${DbSchema.DDL_CREATE_TBL_GAMES}")
-        db.execSQL(DbSchema.DDL_CREATE_TBL_GAMES)
+        db.execSQL(DbSchema.Games.DDL_CREATE_TBL)
+        db.execSQL(DbSchema.Widgets.DDL_CREATE_TBL)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -19,7 +18,8 @@ class DragonItemsOpenHelper(context: Context) : SQLiteOpenHelper(context, Dragon
         //
         // NEVER do this in real apps. Your users wouldn't like
         // loosing data just because you decided to change the schema
-        db.execSQL(DbSchema.DDL_DROP_TBL_GAMES)
+        db.execSQL(DbSchema.Games.DDL_DROP_TBL)
+        db.execSQL(DbSchema.Widgets.DDL_DROP_TBL)
         onCreate(db)
     }
 
