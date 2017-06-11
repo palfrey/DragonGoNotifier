@@ -4,6 +4,7 @@ import android.util.Log
 import net.tevp.dragon_go_notifier.authentication.LoginResult
 import net.tevp.dragon_go_notifier.authentication.LoginStatus
 import net.tevp.dragon_go_notifier.contentProvider.dao.Game
+import org.apache.commons.csv.CSVFormat
 import org.apache.commons.io.IOUtils.toString
 import java.io.BufferedInputStream
 import java.io.IOException
@@ -65,7 +66,7 @@ object DragonServer {
         val content = toString(inStream, "UTF-8")
         Log.d(TAG, "Content: $content")
         val items = Vector<Game>()
-        val csvFormat = org.apache.commons.csv.CSVFormat.DEFAULT.withHeader("G", "game_id", "opponent_handle", "player_color", "lastmove_date", "time_remaining", "game_action", "game_status", "move_id", "tournament_id", "shape_id", "game_type", "game_prio", "opponent_lastaccess_date", "handicap")
+        val csvFormat = CSVFormat.DEFAULT.withHeader("G", "game_id", "opponent_handle", "player_color", "lastmove_date", "time_remaining", "game_action", "game_status", "move_id", "tournament_id", "shape_id", "game_type", "game_prio", "opponent_lastaccess_date", "handicap")
         for (line: String in content.split("\n")) {
             if (!line.startsWith("G,")) {
                 continue // not a Game
