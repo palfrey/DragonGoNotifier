@@ -1,22 +1,30 @@
 package net.tevp.dragon_go_notifier.widget
 
+import android.accounts.AccountManager
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
+import android.content.SyncRequest
+import android.os.Bundle
 import android.util.Log
 import android.widget.RemoteViews
 import net.tevp.dragon_go_notifier.R
+import net.tevp.dragon_go_notifier.authentication.DragonAuthenticatorActivity.Companion.ACCOUNT_TYPE
 import net.tevp.dragon_go_notifier.contentProvider.DbSchema
 import net.tevp.dragon_go_notifier.contentProvider.DragonItemsContract
+import net.tevp.dragon_go_notifier.contentProvider.DragonItemsContract.AUTHORITY
 import net.tevp.dragon_go_notifier.contentProvider.dao.Game
 import net.tevp.dragon_go_notifier.contentProvider.dao.Widget
 import java.util.*
 
 class DragonWidgetProvider : AppWidgetProvider() {
     private val TAG = "DragonWidgetProvider"
+    private val SYNC_CLICKED = "automaticWidgetSyncButtonClick"
+    private val USERNAME = "username"
+
     var updaterBooted = false
 
     override fun onEnabled(context: Context) {
@@ -44,6 +52,26 @@ class DragonWidgetProvider : AppWidgetProvider() {
                 cursor.close()
             }
         }
+    }
+
+    override fun onReceive(context: Context?, intent: Intent?) {
+        if (intent != null && SYNC_CLICKED == intent.action) {
+            val username = intent.getStringExtra(USERNAME)
+            val account = AccountManager.get(context).getAccountsByType(ACCOUNT_TYPE).single { it.name == username }
+            val syncRequest = SyncRequest.Builder()
+                    .setManual(true)
+                    .setExpedited(true)
+                    .setSyncAdapter(account, AUTHORITY)
+                    .syncOnce()
+
+            // Fix bug in Android Lollipop
+            val extras = Bundle()
+            syncRequest.setExtras(extras)
+
+            ContentResolver.requestSync(syncRequest.build())
+        }
+        else
+            super.onReceive(context, intent)
     }
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
@@ -110,8 +138,10 @@ class DragonWidgetProvider : AppWidgetProvider() {
             else
                 views.setInt(R.id.widgetBackground, "setBackgroundResource", R.drawable.widget_back_red)
 
-            val launchDragonIntent = Intent(Intent.ACTION_VIEW).setData(Uri.parse("http://www.dragongoserver.net/status.php"))
-            val pendingIntent = PendingIntent.getActivity(context, 0, launchDragonIntent, 0)
+            val intent = Intent(context, javaClass)
+            intent.action = SYNC_CLICKED
+            intent.putExtra(USERNAME, username)
+            val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
             views.setOnClickPendingIntent(R.id.widgetLayout, pendingIntent)
 
             appWidgetManager.updateAppWidget(widget_id, views)
