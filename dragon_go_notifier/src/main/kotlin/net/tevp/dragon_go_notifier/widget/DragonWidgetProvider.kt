@@ -17,13 +17,16 @@ import java.util.*
 
 class DragonWidgetProvider : AppWidgetProvider() {
     private val TAG = "DragonWidgetProvider"
+    var updaterBooted = false
 
     override fun onEnabled(context: Context) {
         context.startService(Intent(context, DragonWidgetUpdaterService::class.java))
+        updaterBooted = true
     }
 
     override fun onDisabled(context: Context) {
         context.stopService(Intent(context, DragonWidgetUpdaterService::class.java))
+        updaterBooted = false
     }
 
     override fun onRestored(context: Context?, oldWidgetIds: IntArray?, newWidgetIds: IntArray?) {
@@ -45,6 +48,9 @@ class DragonWidgetProvider : AppWidgetProvider() {
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
+        if (!updaterBooted) {
+            context.startService(Intent(context, DragonWidgetUpdaterService::class.java))
+        }
         for (widget_id in appWidgetIds) {
             Log.d(TAG, "Widget update $widget_id")
             var username: String? = null

@@ -20,6 +20,7 @@ class DragonWidgetUpdaterService : Service() {
     private val feedUpdater = FeedUpdater(Handler(), this)
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        Log.d(TAG, "Listening for game changes")
         contentResolver.registerContentObserver(DragonItemsContract.Games.CONTENT_URI, true, feedUpdater)
         return Service.START_STICKY
     }
