@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = '1.1.2-4'
+    ext.kotlin_version = '1.1.2-5'
     repositories {
         jcenter()
     }
@@ -11,7 +11,7 @@ buildscript {
 }
 
 ext {
-    supportLibVersion = '25.1.0'  // variable that can be referenced to keep support libs consistent
+    supportLibVersion = '25.3.1'  // variable that can be referenced to keep support libs consistent
     compileSdkVersion = 25 // should match support lib major version
 }
 
