@@ -12,17 +12,36 @@ import android.os.Handler
 import android.os.IBinder
 import android.util.Log
 import net.tevp.dragon_go_notifier.contentProvider.DragonItemsContract
+import net.tevp.dragon_go_notifier.widget.DragonWidgetUpdaterService.UpdateLock.updateLock
+import net.tevp.dragon_go_notifier.widget.DragonWidgetUpdaterService.UpdateLock.updateState
+import java.util.concurrent.locks.ReentrantLock
 
 class DragonWidgetUpdaterService : Service() {
     private val TAG = "DragonWidgetUpdater"
 
     private val binder = Binder()
     private val feedUpdater = FeedUpdater(Handler(), this)
+    object UpdateLock {
+        var updateState = false
+        val updateLock = ReentrantLock()
+    }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.d(TAG, "Listening for game changes")
-        contentResolver.registerContentObserver(DragonItemsContract.Games.CONTENT_URI, true, feedUpdater)
-        return Service.START_STICKY
+        updateLock.lock()
+        try {
+            if (updateState) {
+                Log.d(TAG, "Already listening for game changes")
+            }
+            else {
+                Log.d(TAG, "Listening for game changes")
+                contentResolver.registerContentObserver(DragonItemsContract.Games.CONTENT_URI, true, feedUpdater)
+                updateState = true
+            }
+            return Service.START_STICKY
+        }
+        finally {
+            updateLock.unlock()
+        }
     }
 
     override fun onBind(intent: Intent): IBinder {
@@ -30,7 +49,16 @@ class DragonWidgetUpdaterService : Service() {
     }
 
     override fun onDestroy() {
-        contentResolver.unregisterContentObserver(feedUpdater)
+        updateLock.lock()
+        try {
+            if (updateState) {
+                contentResolver.unregisterContentObserver(feedUpdater)
+                updateState = false
+            }
+        }
+        finally {
+            updateLock.unlock()
+        }
     }
 
     private inner class FeedUpdater(handler: Handler, private val context: Context) : ContentObserver(handler) {
