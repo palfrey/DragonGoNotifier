@@ -37,7 +37,7 @@ class DragonWidgetUpdaterService : Service() {
                 contentResolver.registerContentObserver(DragonItemsContract.Games.CONTENT_URI, true, feedUpdater)
                 updateState = true
             }
-            return Service.START_STICKY
+            return Service.START_NOT_STICKY
         }
         finally {
             updateLock.unlock()
