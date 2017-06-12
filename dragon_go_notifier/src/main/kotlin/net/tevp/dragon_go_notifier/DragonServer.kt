@@ -86,10 +86,10 @@ object DragonServer {
             val end_time: Date? by lazy {
                 val cal = Calendar.getInstance()
                 if (kind == 'd') {
-                    cal.add(Calendar.DAY_OF_YEAR, count)
+                    cal.add(Calendar.DAY_OF_YEAR, count+1) // fudge so that the remtime counts properly
                 }
                 else if (kind == 'h') {
-                    cal.add(Calendar.HOUR, count)
+                    cal.add(Calendar.HOUR, count+1) // fudge so that the remtime counts properly
                 }
                 else {
                     Log.w(TAG, "Bad time format: $raw_time")
