@@ -109,7 +109,7 @@ class DragonWidgetProvider : AppWidgetProvider() {
             while (gameCursor.moveToNext()) {
                 val game = Game.fromCursor(gameCursor)
                 games++
-                if (game.end_time > end_time) {
+                if (game.my_turn && game.end_time > end_time) {
                     end_time = game.end_time
                 }
             }
@@ -133,7 +133,7 @@ class DragonWidgetProvider : AppWidgetProvider() {
                 setTextViewText(R.id.nextMove, display)
                 setTextViewText(R.id.allMoves, "$games")
             }
-            if (days > 0)
+            if (days > 0 || display == "n/a")
                 views.setInt(R.id.widgetBackground, "setBackgroundResource", R.drawable.widget_back_green)
             else
                 views.setInt(R.id.widgetBackground, "setBackgroundResource", R.drawable.widget_back_red)
