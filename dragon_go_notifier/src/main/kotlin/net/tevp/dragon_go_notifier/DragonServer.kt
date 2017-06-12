@@ -4,15 +4,15 @@ import android.util.Log
 import net.tevp.dragon_go_notifier.authentication.LoginResult
 import net.tevp.dragon_go_notifier.authentication.LoginStatus
 import net.tevp.dragon_go_notifier.contentProvider.dao.Game
-import org.apache.commons.csv.CSVFormat
 import org.apache.commons.io.IOUtils.toString
+import org.json.JSONObject
 import java.io.BufferedInputStream
 import java.io.IOException
-import java.io.StringReader
 import java.net.HttpCookie
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
+
 
 object DragonServer {
     @Throws(IOException::class)
@@ -56,9 +56,11 @@ object DragonServer {
         return result
     }
 
+    data class Player(var handle: String, var remtime: String)
+
     fun getGames(accountName: String, authToken: String): List<Game> {
         val TAG = "DragonServer::getGames"
-        val url = URL("http://www.dragongoserver.net/quick_status.php?version=2&order=0")
+        val url = URL("http://www.dragongoserver.net/quick_do.php?obj=game&cmd=list&view=running&limit=all&with=user_id&lstyle=json")
         val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
         conn.setRequestProperty("Cookie", "cookie_handle=$accountName; cookie_sessioncode=$authToken")
         Log.d(TAG, "Cookie: ${conn.getRequestProperty("Cookie")}")
@@ -66,34 +68,38 @@ object DragonServer {
         val content = toString(inStream, "UTF-8")
         Log.d(TAG, "Content: $content")
         val items = Vector<Game>()
-        val csvFormat = CSVFormat.DEFAULT.withHeader("G", "game_id", "opponent_handle", "player_color", "lastmove_date", "time_remaining", "game_action", "game_status", "move_id", "tournament_id", "shape_id", "game_type", "game_prio", "opponent_lastaccess_date", "handicap")
-        for (line: String in content.split("\n")) {
-            if (!line.startsWith("G,")) {
-                continue // not a Game
+        val jsonObject = JSONObject(content)
+        val records = jsonObject.getJSONArray("list_result")
+        //Log.d(TAG, records.toString(2))
+        for (i in 0 until records.length()) {
+            //Log.d(TAG, "Index: $i")
+            val record = records.getJSONObject(i)
+            //Log.d(TAG, record.toString(2))
+            val white = Player(record.getJSONObject("white_user").getString("handle"), record.getJSONObject("white_gameinfo").getString("remtime"))
+            val black = Player(record.getJSONObject("black_user").getString("handle"), record.getJSONObject("black_gameinfo").getString("remtime"))
+            val player = if (record.getString("move_color") == "W") white else black
+            val opponent = if (white.handle == accountName) black else white
+            val raw_time = player.remtime
+            val time_segments = raw_time.split(" ")
+            val kind = time_segments[1].last()
+            val count = time_segments[1].dropLast(1).toInt()
+            val end_time: Date? by lazy {
+                val cal = Calendar.getInstance()
+                if (kind == 'd') {
+                    cal.add(Calendar.DAY_OF_YEAR, count)
+                }
+                else if (kind == 'h') {
+                    cal.add(Calendar.HOUR, count)
+                }
+                else {
+                    Log.w(TAG, "Bad time format: $raw_time")
+                    return@lazy null
+                }
+                cal.time
             }
-            for (record in csvFormat.parse(StringReader(line))) {
-                val raw_time = record.get("time_remaining");
-                val time_segments = raw_time.split(" ")
-                val kind = time_segments[1].last()
-                val count = time_segments[1].dropLast(1).toInt()
-                val end_time: Date? by lazy {
-                    val cal = Calendar.getInstance()
-                    if (kind == 'd') {
-                        cal.add(Calendar.DAY_OF_YEAR, count)
-                    }
-                    else if (kind == 'h') {
-                        cal.add(Calendar.HOUR, count)
-                    }
-                    else {
-                        Log.w(TAG, "Bad time format: $raw_time")
-                        return@lazy null
-                    }
-                    cal.time
-                }
-                if (end_time != null) {
-                    val game = Game(record.get("game_id").toInt(), accountName, record.get("opponent_handle"), end_time)
-                    items.add(game)
-                }
+            if (end_time != null) {
+                val game = Game(record.getInt("id"), accountName, opponent.handle, end_time, player != opponent)
+                items.add(game)
             }
         }
         Log.d(TAG, "Games: $items")

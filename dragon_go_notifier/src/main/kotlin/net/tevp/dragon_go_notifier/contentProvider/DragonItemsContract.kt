@@ -14,6 +14,7 @@ object DragonItemsContract {
             const val OPPONENT_HANDLE = "OPPONENT_HANDLE"
             const val END_TIME = "END_TIME"
             const val USERNAME = "USERNAME"
+            const val MY_TURN = "MY_TURN"
 
             /**
              * The content URI for this table.
