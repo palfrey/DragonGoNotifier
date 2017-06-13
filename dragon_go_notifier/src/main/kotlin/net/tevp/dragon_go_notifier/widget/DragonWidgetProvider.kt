@@ -133,10 +133,14 @@ class DragonWidgetProvider : AppWidgetProvider() {
                 setTextViewText(R.id.nextMove, display)
                 setTextViewText(R.id.allMoves, "$games")
             }
-            if (days > 0 || display == "n/a")
-                views.setInt(R.id.widgetBackground, "setBackgroundResource", R.drawable.widget_back_green)
+            val backResource = if (days > 0)
+                R.drawable.widget_back_amber
+            else if (hours < 0)
+                R.drawable.widget_back_green
             else
-                views.setInt(R.id.widgetBackground, "setBackgroundResource", R.drawable.widget_back_red)
+                R.drawable.widget_back_red
+
+            views.setInt(R.id.widgetBackground, "setBackgroundResource", backResource)
 
             val intent = Intent(context, javaClass)
             intent.action = SYNC_CLICKED

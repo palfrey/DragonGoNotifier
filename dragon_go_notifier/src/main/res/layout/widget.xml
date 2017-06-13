@@ -18,9 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="21d"
+            android:text="unk"
             android:maxLines="1"
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:id="@+id/nextMove"
             android:gravity="center"
             />
@@ -28,9 +28,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="(13d)"
+            android:text="..."
             android:maxLines="1"
-            android:textColor="#000000"
+            android:textColor="#ffffff"
             android:id="@+id/allMoves"
             android:gravity="center" />
     </LinearLayout>
