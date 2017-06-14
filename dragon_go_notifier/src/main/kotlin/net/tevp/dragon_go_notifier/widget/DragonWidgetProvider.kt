@@ -106,11 +106,14 @@ class DragonWidgetProvider : AppWidgetProvider() {
                     DragonItemsContract.Games.CONTENT_URI, emptyArray(), "${DbSchema.Games.COL_USERNAME} = ?", arrayOf(username), "")
             var end_time = Date()
             var games = 0
+            var my_turn_games = 0
             while (gameCursor.moveToNext()) {
                 val game = Game.fromCursor(gameCursor)
                 games++
-                if (game.my_turn && game.end_time > end_time) {
-                    end_time = game.end_time
+                if (game.my_turn) {
+                    my_turn_games++
+                    if (game.end_time > end_time)
+                        end_time = game.end_time
                 }
             }
             gameCursor.close()
@@ -131,7 +134,7 @@ class DragonWidgetProvider : AppWidgetProvider() {
             // initializing widget layout
             val views = RemoteViews(context.packageName, R.layout.widget).apply {
                 setTextViewText(R.id.nextMove, display)
-                setTextViewText(R.id.allMoves, "$games")
+                setTextViewText(R.id.allMoves, "$my_turn_games ($games)")
             }
             val backResource = if (days > 0)
                 R.drawable.widget_back_amber
