@@ -24,6 +24,9 @@ class DragonWidgetProvider : AppWidgetProvider() {
     private val TAG = "DragonWidgetProvider"
     private val SYNC_CLICKED = "automaticWidgetSyncButtonClick"
     private val USERNAME = "username"
+    private val NEXT_MOVE = "nextMove"
+    private val GAMES_DISPLAY = "gamesDisplay"
+    private val WIDGET_ID = "widget_id"
 
     var updaterBooted = false
 
@@ -56,6 +59,12 @@ class DragonWidgetProvider : AppWidgetProvider() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         if (intent != null && SYNC_CLICKED == intent.action) {
+            if (context != null) {
+                val views = setDisplay(context, R.drawable.widget_back_white, intent.getStringExtra(NEXT_MOVE), intent.getStringExtra(GAMES_DISPLAY))
+                val appWidgetManager = AppWidgetManager.getInstance(context)
+                appWidgetManager.updateAppWidget(intent.getIntExtra(WIDGET_ID, -1), views)
+            }
+
             val username = intent.getStringExtra(USERNAME)
             val account = AccountManager.get(context).getAccountsByType(ACCOUNT_TYPE).single { it.name == username }
             val syncRequest = SyncRequest.Builder()
@@ -72,6 +81,15 @@ class DragonWidgetProvider : AppWidgetProvider() {
         }
         else
             super.onReceive(context, intent)
+    }
+
+    fun setDisplay(context: Context, backResource: Int, nextMove: String?, games_display: String?): RemoteViews {
+        val views = RemoteViews(context.packageName, R.layout.widget).apply {
+            setTextViewText(R.id.nextMove, nextMove)
+            setTextViewText(R.id.allMoves, games_display)
+        }
+        views.setInt(R.id.widgetBackground, "setBackgroundResource", backResource)
+        return views
     }
 
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
@@ -122,6 +140,7 @@ class DragonWidgetProvider : AppWidgetProvider() {
             val hours = Math.floor(diff / (60 * 60 * 1000.0)).toInt()
             val days = Math.floor(hours / 24.0).toInt()
             Log.d(TAG, "Hours: $hours, Days: $days")
+
             val display: String
             if (days > 0) {
                 display = "${days}d"
@@ -131,11 +150,6 @@ class DragonWidgetProvider : AppWidgetProvider() {
                 display = "n/a"
             }
 
-            // initializing widget layout
-            val views = RemoteViews(context.packageName, R.layout.widget).apply {
-                setTextViewText(R.id.nextMove, display)
-                setTextViewText(R.id.allMoves, "$my_turn_games ($games)")
-            }
             val backResource = if (days > 0)
                 R.drawable.widget_back_amber
             else if (hours < 0)
@@ -143,14 +157,18 @@ class DragonWidgetProvider : AppWidgetProvider() {
             else
                 R.drawable.widget_back_red
 
-            views.setInt(R.id.widgetBackground, "setBackgroundResource", backResource)
+            val gameDisplay = "$my_turn_games ($games)"
+            val views = setDisplay(context, backResource, display, gameDisplay)
 
             val intent = Intent(context, javaClass)
             intent.action = SYNC_CLICKED
             intent.putExtra(USERNAME, username)
+            intent.putExtra(NEXT_MOVE, display)
+            intent.putExtra(GAMES_DISPLAY, gameDisplay)
+            intent.putExtra(WIDGET_ID, widget_id)
+
             val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
             views.setOnClickPendingIntent(R.id.widgetLayout, pendingIntent)
-
             appWidgetManager.updateAppWidget(widget_id, views)
         }
     }
