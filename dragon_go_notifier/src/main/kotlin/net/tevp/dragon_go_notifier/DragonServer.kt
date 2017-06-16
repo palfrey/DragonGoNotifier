@@ -3,6 +3,7 @@ package net.tevp.dragon_go_notifier
 import android.util.Log
 import net.tevp.dragon_go_notifier.authentication.LoginResult
 import net.tevp.dragon_go_notifier.authentication.LoginStatus
+import net.tevp.dragon_go_notifier.authentication.NotLoggedInException
 import net.tevp.dragon_go_notifier.contentProvider.dao.Game
 import org.apache.commons.io.IOUtils.toString
 import org.json.JSONObject
@@ -69,6 +70,17 @@ object DragonServer {
         Log.d(TAG, "Content: $content")
         val items = Vector<Game>()
         val jsonObject = JSONObject(content)
+        if (jsonObject.has("error")) {
+            val error = jsonObject.getString("error")
+            if (error != "") {
+                if (error == "not_logged_in") {
+                    Log.w(TAG, "Invalid auth token")
+                    throw NotLoggedInException()
+                }
+                else
+                    throw Exception("Error from Dragon Go server: $error")
+            }
+        }
         val records = jsonObject.getJSONArray("list_result")
         //Log.d(TAG, records.toString(2))
         for (i in 0 until records.length()) {

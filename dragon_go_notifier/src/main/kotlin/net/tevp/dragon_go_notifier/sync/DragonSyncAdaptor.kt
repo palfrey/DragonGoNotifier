@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import net.tevp.dragon_go_notifier.DragonServer
 import net.tevp.dragon_go_notifier.authentication.DragonAuthenticatorActivity
+import net.tevp.dragon_go_notifier.authentication.NotLoggedInException
 import net.tevp.dragon_go_notifier.contentProvider.DbSchema
 import net.tevp.dragon_go_notifier.contentProvider.DragonItemsContract
 import net.tevp.dragon_go_notifier.contentProvider.dao.Game
@@ -20,8 +21,8 @@ class DragonSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractThr
     override fun onPerformSync(account: Account, extras: Bundle, authority: String, provider: ContentProviderClient, syncResult: SyncResult) {
         context.startService(Intent(context, DragonWidgetUpdaterService::class.java))
         Log.d(TAG, "onPerformSync for account[" + account.name + "]")
+        val authToken = mAccountManager.blockingGetAuthToken(account, DragonAuthenticatorActivity.AUTHTOKEN_TYPE_FULL_ACCESS, true)
         try {
-            val authToken = mAccountManager.blockingGetAuthToken(account, DragonAuthenticatorActivity.AUTHTOKEN_TYPE_FULL_ACCESS, true)
             val remoteGames = DragonServer.getGames(account.name, authToken)
             val localGames: ArrayList<Game> = ArrayList()
             val curGames = provider.query(DragonItemsContract.Games.CONTENT_URI, emptyArray(), "${DbSchema.Games.COL_USERNAME} = ?", arrayOf(account.name), "")
@@ -45,8 +46,7 @@ class DragonSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractThr
                 if (localGame.hasChanges()) {
                     Log.d(TAG, "Local -> Remote [$localGame]")
                     TODO("Sync game to remote")
-                }
-                else
+                } else
                     Log.d(TAG, "$localGame has no changes")
             }
 
@@ -58,12 +58,11 @@ class DragonSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractThr
                 if (remoteGame in localGames) {
                     Log.d(TAG, "Remote -> Local update [$remoteGame]")
                     provider.update(remoteGame.contentUri, remoteGame.contentValues, "", emptyArray())
-                    syncResult.stats.numUpdates ++
-                }
-                else {
+                    syncResult.stats.numUpdates++
+                } else {
                     Log.d(TAG, "Remote -> Local insert [$remoteGame]")
                     provider.insert(DragonItemsContract.Games.CONTENT_URI, remoteGame.contentValues)
-                    syncResult.stats.numInserts ++
+                    syncResult.stats.numInserts++
                 }
                 context.contentResolver.notifyChange(remoteGame.contentUri, null, false)
             }
@@ -72,12 +71,14 @@ class DragonSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractThr
                 Log.d(TAG, "Removing $localGame from local storage")
                 provider.delete(localGame.contentUri, "", emptyArray())
                 context.contentResolver.notifyChange(localGame.contentUri, null, false)
-                syncResult.stats.numDeletes ++
+                syncResult.stats.numDeletes++
             }
 
             Log.d(TAG, syncResult.stats.toString())
             Log.d(TAG, "Finished")
-
+        } catch(e: NotLoggedInException) {
+            syncResult.stats.numIoExceptions++
+            mAccountManager.invalidateAuthToken(account.type, authToken)
         } catch (e: Exception) {
             e.printStackTrace()
         }
