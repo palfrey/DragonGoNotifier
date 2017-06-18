@@ -58,14 +58,14 @@ class DragonWidgetProvider : AppWidgetProvider() {
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        if (intent != null && SYNC_CLICKED == intent.action) {
-            if (context != null) {
-                val views = setDisplay(context, R.drawable.widget_back_white, intent.getStringExtra(NEXT_MOVE), intent.getStringExtra(GAMES_DISPLAY))
-                val appWidgetManager = AppWidgetManager.getInstance(context)
-                appWidgetManager.updateAppWidget(intent.getIntExtra(WIDGET_ID, -1), views)
-            }
+        if (context != null && intent != null && SYNC_CLICKED == intent.action) {
+            val widget_id = intent.getIntExtra(WIDGET_ID, -1)
+            val appWidgetManager = AppWidgetManager.getInstance(context)
+            val views = setDisplay(context, R.drawable.widget_back_white, widget_id)
+            appWidgetManager.updateAppWidget(widget_id, views)
 
-            val username = intent.getStringExtra(USERNAME)
+            val options = appWidgetManager.getAppWidgetOptions(widget_id)
+            val username = options.getString(USERNAME)
             val account = AccountManager.get(context).getAccountsByType(ACCOUNT_TYPE).single { it.name == username }
             val syncRequest = SyncRequest.Builder()
                     .setManual(true)
@@ -83,10 +83,12 @@ class DragonWidgetProvider : AppWidgetProvider() {
             super.onReceive(context, intent)
     }
 
-    fun setDisplay(context: Context, backResource: Int, nextMove: String?, games_display: String?): RemoteViews {
+    fun setDisplay(context: Context, backResource: Int, widget_id: Int): RemoteViews {
+        val appWidgetManager = AppWidgetManager.getInstance(context)
+        val options = appWidgetManager.getAppWidgetOptions(widget_id)
         val views = RemoteViews(context.packageName, R.layout.widget).apply {
-            setTextViewText(R.id.nextMove, nextMove)
-            setTextViewText(R.id.allMoves, games_display)
+            setTextViewText(R.id.nextMove, options.getString(NEXT_MOVE, "unk"))
+            setTextViewText(R.id.allMoves, options.getString(GAMES_DISPLAY, "0 (0)"))
         }
         views.setInt(R.id.widgetBackground, "setBackgroundResource", backResource)
         return views
@@ -99,12 +101,14 @@ class DragonWidgetProvider : AppWidgetProvider() {
         }
         for (widget_id in appWidgetIds) {
             Log.d(TAG, "Widget update $widget_id")
+            val options = appWidgetManager.getAppWidgetOptions(widget_id)
             var username: String? = null
             val widgetCursor = context.contentResolver.query(
                     DragonItemsContract.Widgets.CONTENT_URI, emptyArray(), "${DbSchema.Widgets.COL_ID} = ?", arrayOf(widget_id.toString()), "")
             while (widgetCursor.moveToNext()) {
                 val widget = Widget.fromCursor(widgetCursor)
                 username = widget.username
+                options.putString(USERNAME, username)
                 Log.d(TAG, "Loading $username for $widget_id")
             }
             widgetCursor.close()
@@ -158,14 +162,15 @@ class DragonWidgetProvider : AppWidgetProvider() {
                 R.drawable.widget_back_red
 
             val gameDisplay = "$my_turn_games ($games)"
-            val views = setDisplay(context, backResource, display, gameDisplay)
+            val views = setDisplay(context, backResource, widget_id)
 
             val intent = Intent(context, javaClass)
             intent.action = SYNC_CLICKED
-            intent.putExtra(USERNAME, username)
-            intent.putExtra(NEXT_MOVE, display)
-            intent.putExtra(GAMES_DISPLAY, gameDisplay)
             intent.putExtra(WIDGET_ID, widget_id)
+
+            options.putString(NEXT_MOVE, display)
+            options.putString(GAMES_DISPLAY, gameDisplay)
+            appWidgetManager.updateAppWidgetOptions(widget_id, options)
 
             val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
             views.setOnClickPendingIntent(R.id.widgetLayout, pendingIntent)
