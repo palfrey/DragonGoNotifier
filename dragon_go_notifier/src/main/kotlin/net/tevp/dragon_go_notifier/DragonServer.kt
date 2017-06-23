@@ -6,6 +6,9 @@ import net.tevp.dragon_go_notifier.authentication.LoginStatus
 import net.tevp.dragon_go_notifier.authentication.NotLoggedInException
 import net.tevp.dragon_go_notifier.contentProvider.dao.Game
 import org.apache.commons.io.IOUtils.toString
+import org.joda.time.DateTime
+import org.joda.time.MutablePeriod
+import org.joda.time.Period
 import org.json.JSONObject
 import java.io.BufferedInputStream
 import java.io.IOException
@@ -13,7 +16,6 @@ import java.net.HttpCookie
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
-
 
 object DragonServer {
     @Throws(IOException::class)
@@ -91,23 +93,13 @@ object DragonServer {
             val black = Player(record.getJSONObject("black_user").getString("handle"), record.getJSONObject("black_gameinfo").getString("remtime"))
             val player = if (record.getString("move_color") == "W") white else black
             val opponent = if (white.handle == accountName) black else white
-            val raw_time = player.remtime
-            val time_segments = raw_time.split(" ")
-            val kind = time_segments[1].last()
-            val count = time_segments[1].dropLast(1).toInt()
             val end_time: Date? by lazy {
-                val cal = Calendar.getInstance()
-                if (kind == 'd') {
-                    cal.add(Calendar.DAY_OF_YEAR, count+1) // fudge so that the remtime counts properly
-                }
-                else if (kind == 'h') {
-                    cal.add(Calendar.HOUR, count+1) // fudge so that the remtime counts properly
-                }
-                else {
-                    Log.w(TAG, "Bad time format: $raw_time")
+                val period = periodFromDate(player.remtime)
+                if (period == null)
                     return@lazy null
+                else {
+                    DateTime().plus(period).toDate()
                 }
-                cal.time
             }
             if (end_time != null) {
                 val game = Game(record.getInt("id"), accountName, opponent.handle, end_time, player != opponent)
@@ -116,5 +108,32 @@ object DragonServer {
         }
         Log.d(TAG, "Games: $items")
         return items
+    }
+
+    fun periodFromDate(raw_time: String): Period? {
+        val TAG = "DragonServer::periodFro"
+        val regex = Regex(".+: (.+) \\(")
+        val items = regex.find(raw_time)
+        if (items == null)
+        {
+            Log.w(TAG, "Bad time format: $raw_time")
+            return null
+        }
+        val period = MutablePeriod()
+        val bits = items.groups[1]?.value ?: ""
+        for(bit in bits.split(" ")) {
+            val kind = bit.last()
+            val count = bit.take(bit.length - 1).toInt()
+            if (kind == 'd') {
+                period.addDays(count)
+            } else if (kind == 'h') {
+                period.addHours(count)
+            } else {
+                Log.w(TAG, "Bad time segment: '$bit' in '$raw_time")
+                return null
+            }
+        }
+        Log.d(TAG, "Period for $raw_time is $period")
+        return period.toPeriod()
     }
 }
