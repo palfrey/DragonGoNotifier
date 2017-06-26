@@ -150,7 +150,7 @@ class DragonWidgetProvider : AppWidgetProvider() {
             } else if (hours > 0) {
                 display = "${hours}h"
             } else {
-                display = "n/a"
+                display = "∞"
             }
 
             val backResource = if (end_time == null)
