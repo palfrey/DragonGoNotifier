@@ -126,7 +126,7 @@ class DragonWidgetProvider : AppWidgetProvider() {
 
             val gameCursor = context.contentResolver.query(
                     DragonItemsContract.Games.CONTENT_URI, emptyArray(), "${DbSchema.Games.COL_USERNAME} = ?", arrayOf(username), "")
-            var end_time = Date()
+            var end_time: Date? = null
             var games = 0
             var my_turn_games = 0
             while (gameCursor.moveToNext()) {
@@ -134,13 +134,12 @@ class DragonWidgetProvider : AppWidgetProvider() {
                 games++
                 if (game.my_turn) {
                     my_turn_games++
-                    if (game.end_time > end_time)
+                    if (end_time == null || game.end_time < end_time)
                         end_time = game.end_time
                 }
             }
             gameCursor.close()
-            Log.d(TAG, end_time.toString())
-            val diff = end_time.time - Date().time
+            val diff = if (end_time == null) 0 else end_time.time - Date().time
             val hours = Math.floor(diff / (60 * 60 * 1000.0)).toInt()
             val days = Math.floor(hours / 24.0).toInt()
             Log.d(TAG, "Hours: $hours, Days: $days")
@@ -154,10 +153,10 @@ class DragonWidgetProvider : AppWidgetProvider() {
                 display = "n/a"
             }
 
-            val backResource = if (days > 0)
-                R.drawable.widget_back_amber
-            else if (hours < 0)
+            val backResource = if (end_time == null)
                 R.drawable.widget_back_green
+            else if (days > 0)
+                R.drawable.widget_back_amber
             else
                 R.drawable.widget_back_red
 
