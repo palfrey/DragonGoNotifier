@@ -1,13 +1,20 @@
 package net.tevp.dragon_go_notifier
 
+import android.util.Log
 import org.joda.time.Period
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 import org.junit.runners.Parameterized.Parameters
+import org.powermock.api.mockito.PowerMockito
+import org.powermock.core.classloader.annotations.PrepareForTest
+import org.powermock.modules.junit4.PowerMockRunner
+import org.powermock.modules.junit4.PowerMockRunnerDelegate
 
-@RunWith(Parameterized::class)
+@RunWith(PowerMockRunner::class)
+@PowerMockRunnerDelegate(Parameterized::class)
+@PrepareForTest(Log::class)
 class DragonServerTest(val fInput: String, val fExpected: Period) {
     companion object {
         @Parameters
@@ -22,7 +29,8 @@ class DragonServerTest(val fInput: String, val fExpected: Period) {
     }
 
     @Test
-    fun test() {
+    fun periodFromDate() {
+        PowerMockito.mockStatic(Log::class.java)
         assertEquals(fExpected, DragonServer.periodFromDate(fInput))
     }
 }
