@@ -119,9 +119,28 @@ object DragonServer {
             Log.w(TAG, "Bad time format: $raw_time")
             return null
         }
+        val period = periodFromOnlyDate(items.groups[1]?.value ?: "")
+        Log.d(TAG, "Period for $raw_time is $period")
+        return period?.toPeriod()
+    }
+
+    fun holidayPeriodFromDate(raw_time: String): Period {
+        val TAG = "DragonServer::periodFro"
+        val period = periodFromOnlyDate(raw_time)
+        Log.d(TAG, "Period for $raw_time is $period")
+        if (period == null)
+            return Period.ZERO
+        return period.toPeriod()
+    }
+
+    fun periodFromOnlyDate(raw_time: String): Period? {
+        val TAG = "DragonServer::onlyDate"
         val period = MutablePeriod()
-        val bits = items.groups[1]?.value ?: ""
-        for(bit in bits.split(" ")) {
+        for(bit in raw_time.split(" ")) {
+            if (bit.isEmpty()) {
+                continue
+            }
+
             val kind = bit.last()
             val count = bit.take(bit.length - 1).toInt()
             if (kind == 'd') {

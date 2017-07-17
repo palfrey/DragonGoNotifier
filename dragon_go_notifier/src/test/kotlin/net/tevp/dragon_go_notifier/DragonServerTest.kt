@@ -15,7 +15,7 @@ import org.powermock.modules.junit4.PowerMockRunnerDelegate
 @RunWith(PowerMockRunner::class)
 @PowerMockRunnerDelegate(Parameterized::class)
 @PrepareForTest(Log::class)
-class DragonServerTest(val fInput: String, val fExpected: Period) {
+class GameDatePeriod(val fInput: String, val fExpected: Period) {
     companion object {
         @Parameters
         @JvmStatic
@@ -32,5 +32,28 @@ class DragonServerTest(val fInput: String, val fExpected: Period) {
     fun periodFromDate() {
         PowerMockito.mockStatic(Log::class.java)
         assertEquals(fExpected, DragonServer.periodFromDate(fInput))
+    }
+}
+
+@RunWith(PowerMockRunner::class)
+@PowerMockRunnerDelegate(Parameterized::class)
+@PrepareForTest(Log::class)
+class HolidayDatePeriod(val fInput: String, val fExpected: Period) {
+    companion object {
+        @Parameters
+        @JvmStatic
+        fun data(): List<Array<Any>> {
+            return listOf(
+                    arrayOf<Any>("7h", Period(0, 0, 0, 0, 7, 0, 0, 0)),
+                    arrayOf<Any>("1d 7h", Period(0, 0, 0, 1, 7, 0, 0, 0)),
+                    arrayOf<Any>("", Period(0, 0, 0, 0, 0, 0, 0, 0))
+            )
+        }
+    }
+
+    @Test
+    fun periodFromDate() {
+        PowerMockito.mockStatic(Log::class.java)
+        assertEquals(fExpected, DragonServer.holidayPeriodFromDate(fInput))
     }
 }
