@@ -17,8 +17,12 @@ import net.tevp.dragon_go_notifier.contentProvider.DbSchema
 import net.tevp.dragon_go_notifier.contentProvider.DragonItemsContract
 import net.tevp.dragon_go_notifier.contentProvider.DragonItemsContract.AUTHORITY
 import net.tevp.dragon_go_notifier.contentProvider.dao.Game
+import net.tevp.dragon_go_notifier.contentProvider.dao.User
 import net.tevp.dragon_go_notifier.contentProvider.dao.Widget
-import java.util.*
+import org.joda.time.DateTime
+import org.joda.time.Days
+import org.joda.time.Hours
+import org.joda.time.Period
 
 class DragonWidgetProvider : AppWidgetProvider() {
     private val TAG = "DragonWidgetProvider"
@@ -126,7 +130,7 @@ class DragonWidgetProvider : AppWidgetProvider() {
 
             val gameCursor = context.contentResolver.query(
                     DragonItemsContract.Games.CONTENT_URI, emptyArray(), "${DbSchema.Games.COL_USERNAME} = ?", arrayOf(username), "")
-            var end_time: Date? = null
+            var end_time: DateTime? = null
             var games = 0
             var my_turn_games = 0
             while (gameCursor.moveToNext()) {
@@ -134,14 +138,31 @@ class DragonWidgetProvider : AppWidgetProvider() {
                 games++
                 if (game.my_turn) {
                     my_turn_games++
-                    if (end_time == null || game.end_time < end_time)
-                        end_time = game.end_time
+                    if (end_time == null || DateTime(game.end_time) < end_time)
+                        end_time = DateTime(game.end_time)
                 }
             }
             gameCursor.close()
-            val diff = if (end_time == null) 0 else end_time.time - Date().time
-            val hours = Math.floor(diff / (60 * 60 * 1000.0)).toInt()
-            val days = Math.floor(hours / 24.0).toInt()
+            val userCursor = context.contentResolver.query(
+                    DragonItemsContract.Users.CONTENT_URI, emptyArray(), "${DbSchema.Users.COL_USERNAME} = ?", arrayOf(username), "")
+            if (userCursor == null || userCursor.isAfterLast) {
+                Log.w(TAG, "No user object for $username")
+            }
+            else {
+                userCursor.moveToFirst()
+                val user = User.fromCursor(userCursor)
+                if (end_time != null) {
+                    Log.d(TAG, "End time: $end_time")
+                    end_time = end_time.plus(Hours.hours(user.holiday_hours))
+                    Log.d(TAG, "Got $user")
+                    Log.d(TAG, "End time: $end_time")
+                }
+            }
+
+            var diff = if (end_time == null) Period.ZERO else Period(DateTime.now(), end_time)
+            val days = diff.toStandardDays().days
+            diff = diff.minus(Days.days(days))
+            val hours = diff.toStandardHours().hours
             Log.d(TAG, "Hours: $hours, Days: $days")
 
             val display: String
@@ -176,5 +197,4 @@ class DragonWidgetProvider : AppWidgetProvider() {
             appWidgetManager.updateAppWidget(widget_id, views)
         }
     }
-
 }

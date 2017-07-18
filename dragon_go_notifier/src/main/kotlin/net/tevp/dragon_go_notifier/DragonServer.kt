@@ -155,4 +155,18 @@ object DragonServer {
         Log.d(TAG, "Period for $raw_time is $period")
         return period.toPeriod()
     }
+
+    fun getHolidayHours(accountName: String, authToken: String?): Int {
+        val TAG = "DragonServer:getUser"
+        val url = URL("http://www.dragongoserver.net/quick_do.php?obj=user&cmd=info&lstyle=json")
+        val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+        conn.setRequestProperty("Cookie", "cookie_handle=$accountName; cookie_sessioncode=$authToken")
+        val inStream = BufferedInputStream(conn.inputStream)
+        val content = toString(inStream, "UTF-8")
+        Log.d(TAG, "Content: $content")
+        val jsonObject = JSONObject(content)
+        val vacation_on = jsonObject.getString("vacation_on")
+        val holidayPeriod = holidayPeriodFromDate(vacation_on)
+        return holidayPeriod.days*24 + holidayPeriod.hours
+    }
 }

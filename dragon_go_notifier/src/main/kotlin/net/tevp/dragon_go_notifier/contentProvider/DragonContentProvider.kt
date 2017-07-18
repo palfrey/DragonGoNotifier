@@ -10,6 +10,7 @@ import android.net.Uri
 import android.text.TextUtils
 import android.util.Log
 import net.tevp.dragon_go_notifier.contentProvider.DragonItemsContract.Games
+import net.tevp.dragon_go_notifier.contentProvider.DragonItemsContract.Users
 import net.tevp.dragon_go_notifier.contentProvider.DragonItemsContract.Widgets
 import java.sql.SQLException
 
@@ -23,6 +24,7 @@ class DragonContentProvider : ContentProvider() {
     override fun query(uri: Uri, projection: Array<String>, selection: String, selectionArgs: Array<String>, sortOrder: String): Cursor {
         var localSortOrder = sortOrder
         val db = mHelper.readableDatabase
+        Log.d("DragonContentProvider", "Database: ${db.version}")
         val builder = SQLiteQueryBuilder()
         when (URI_MATCHER.match(uri)) {
             GAME_LIST -> {
@@ -47,6 +49,18 @@ class DragonContentProvider : ContentProvider() {
                 builder.tables = DbSchema.Widgets.TBL_NAME
                 // limit query to one row at most:
                 builder.appendWhere(Widgets._ID + " = " +
+                        uri.lastPathSegment)
+            }
+            USER_LIST -> {
+                builder.tables = DbSchema.Users.TBL_NAME
+                if (TextUtils.isEmpty(sortOrder)) {
+                    localSortOrder = DragonItemsContract.Users.SORT_ORDER_DEFAULT
+                }
+            }
+            USER_ID -> {
+                builder.tables = DbSchema.Users.TBL_NAME
+                // limit query to one row at most:
+                builder.appendWhere(Users.USERNAME + " = " +
                         uri.lastPathSegment)
             }
             else -> throw IllegalArgumentException(
@@ -80,6 +94,7 @@ class DragonContentProvider : ContentProvider() {
             when (URI_MATCHER.match(uri)) {
                 GAME_LIST -> DbSchema.Games.TBL_NAME
                 WIDGET_LIST -> DbSchema.Widgets.TBL_NAME
+                USER_LIST -> DbSchema.Users.TBL_NAME
                 else -> throw IllegalArgumentException(
                         "Unsupported URI for insertion: " + uri)
             }
@@ -194,6 +209,18 @@ class DragonContentProvider : ContentProvider() {
                         where,
                         selectionArgs)
             }
+            USER_ID -> {
+                val idStr = uri.lastPathSegment
+                var where = "${Users.USERNAME} = \"$idStr\""
+                if (!TextUtils.isEmpty(selection)) {
+                    where += " AND " + selection
+                }
+                updateCount = db.update(
+                        DbSchema.Users.TBL_NAME,
+                        values,
+                        where,
+                        selectionArgs)
+            }
             else ->
                 throw IllegalArgumentException("Unsupported URI: " + uri)
         }
@@ -209,6 +236,8 @@ class DragonContentProvider : ContentProvider() {
         private val GAME_ID = 2
         private val WIDGET_LIST = 3
         private val WIDGET_ID = 4
+        private val USER_LIST = 5
+        private val USER_ID = 6
         private val URI_MATCHER: UriMatcher = UriMatcher(UriMatcher.NO_MATCH)
 
         // prepare the UriMatcher
@@ -225,6 +254,12 @@ class DragonContentProvider : ContentProvider() {
             URI_MATCHER.addURI(DragonItemsContract.AUTHORITY,
                     "widgets/#",
                     WIDGET_ID)
+            URI_MATCHER.addURI(DragonItemsContract.AUTHORITY,
+                    "users",
+                    USER_LIST)
+            URI_MATCHER.addURI(DragonItemsContract.AUTHORITY,
+                    "users/*",
+                    USER_ID)
         }
     }
 }

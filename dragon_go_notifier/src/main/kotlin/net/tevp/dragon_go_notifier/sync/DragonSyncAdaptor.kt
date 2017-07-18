@@ -11,6 +11,7 @@ import net.tevp.dragon_go_notifier.authentication.NotLoggedInException
 import net.tevp.dragon_go_notifier.contentProvider.DbSchema
 import net.tevp.dragon_go_notifier.contentProvider.DragonItemsContract
 import net.tevp.dragon_go_notifier.contentProvider.dao.Game
+import net.tevp.dragon_go_notifier.contentProvider.dao.User
 import net.tevp.dragon_go_notifier.widget.DragonWidgetUpdaterService
 
 class DragonSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractThreadedSyncAdapter(context, autoInitialize) {
@@ -72,6 +73,20 @@ class DragonSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractThr
                 provider.delete(localGame.contentUri, "", emptyArray())
                 context.contentResolver.notifyChange(localGame.contentUri, null, false)
                 syncResult.stats.numDeletes++
+            }
+
+            val holiday_hours = DragonServer.getHolidayHours(account.name, authToken)
+            Log.d(TAG, "Got $holiday_hours for ${account.name}")
+            val existingUsers = provider.query(DragonItemsContract.Users.CONTENT_URI, emptyArray(), "${DbSchema.Users.COL_USERNAME} = ?", arrayOf(account.name), "")
+            if (existingUsers == null || existingUsers.isAfterLast) {
+                val newUser = User(account.name, holiday_hours)
+                provider.insert(DragonItemsContract.Users.CONTENT_URI, newUser.contentValues)
+            }
+            else {
+                existingUsers.moveToFirst()
+                val existingUser = User.fromCursor(existingUsers)
+                existingUser.holiday_hours = holiday_hours
+                provider.update(existingUser.contentUri, existingUser.contentValues, "", emptyArray())
             }
 
             Log.d(TAG, syncResult.stats.toString())

@@ -53,4 +53,25 @@ object DragonItemsContract {
             val SORT_ORDER_DEFAULT = _ID + " ASC"
         }
     }
+
+    class Users : BaseColumns {
+        companion object {
+            const val USERNAME = "USERNAME"
+            const val HOLIDAY_HOURS = "HOLIDAY_HOURS"
+
+            /**
+             * The content URI for this table.
+             */
+            val CONTENT_URI = Uri.withAppendedPath(DragonItemsContract.CONTENT_URI, "users")!!
+            /**
+             * The mime type of a directory of items.
+             */
+            val CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE + "/vnd.net.tevp.dragon_go_notifier.users"
+            /**
+             * The mime type of a single item.
+             */
+            val CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.net.tevp.dragon_go_notifier.users"
+            val SORT_ORDER_DEFAULT = USERNAME + " ASC"
+        }
+    }
 }

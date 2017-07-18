@@ -18,7 +18,6 @@ object DbSchema {
                 "$COL_END_TIME      DATETIME, \n" +
                 "$COL_MY_TURN      BOOLEAN \n" +
                 ")"
-        val DDL_DROP_TBL = "DROP TABLE IF EXISTS $TBL_NAME"
     }
 
     object Widgets {
@@ -30,6 +29,16 @@ object DbSchema {
                 "$COL_ID           INTEGER  PRIMARY KEY, \n" +
                 "$COL_USERNAME     VARCHAR(64) \n" +
                 ")"
-        val DDL_DROP_TBL = "DROP TABLE IF EXISTS $TBL_NAME"
+    }
+
+    object Users {
+        const val TBL_NAME = "users"
+        const val COL_USERNAME = DragonItemsContract.Users.USERNAME
+        const val COL_HOLIDAY_HOURS = DragonItemsContract.Users.HOLIDAY_HOURS
+
+        val DDL_CREATE_TBL = "CREATE TABLE $TBL_NAME (" +
+                "$COL_USERNAME     VARCHAR(64) PRIMARY KEY, \n" +
+                "$COL_HOLIDAY_HOURS     INTEGER \n" +
+                ")"
     }
 }
