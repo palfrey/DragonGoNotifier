@@ -21,7 +21,7 @@ object DragonServer {
     @Throws(IOException::class)
     fun Login(username: String, password: String): LoginResult {
         val TAG = "DragonServer::Login"
-        val url = URL("http://www.dragongoserver.net/login.php?quick_mode=1&userid=$username&passwd=$password")
+        val url = URL("https://www.dragongoserver.net/login.php?quick_mode=1&userid=$username&passwd=$password")
         Log.d(TAG, "Url: $url")
         val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
         val inStream = BufferedInputStream(conn.inputStream)
@@ -63,7 +63,7 @@ object DragonServer {
 
     fun getGames(accountName: String, authToken: String): List<Game> {
         val TAG = "DragonServer::getGames"
-        val url = URL("http://www.dragongoserver.net/quick_do.php?obj=game&cmd=list&view=running&limit=all&with=user_id&lstyle=json")
+        val url = URL("https://www.dragongoserver.net/quick_do.php?obj=game&cmd=list&view=running&limit=all&with=user_id&lstyle=json")
         val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
         conn.setRequestProperty("Cookie", "cookie_handle=$accountName; cookie_sessioncode=$authToken")
         Log.d(TAG, "Cookie: ${conn.getRequestProperty("Cookie")}")
@@ -158,7 +158,7 @@ object DragonServer {
 
     fun getHolidayHours(accountName: String, authToken: String?): Int {
         val TAG = "DragonServer:getUser"
-        val url = URL("http://www.dragongoserver.net/quick_do.php?obj=user&cmd=info&lstyle=json")
+        val url = URL("https://www.dragongoserver.net/quick_do.php?obj=user&cmd=info&lstyle=json")
         val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
         conn.setRequestProperty("Cookie", "cookie_handle=$accountName; cookie_sessioncode=$authToken")
         val inStream = BufferedInputStream(conn.inputStream)

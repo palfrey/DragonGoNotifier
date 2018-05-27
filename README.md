@@ -1,6 +1,6 @@
 # Dragon Go Server notifier
 
-Notifier widget for when your next [Dragon Go Server](http://www.dragongoserver.net/) game will expire due to timeouts
+Notifier widget for when your next [Dragon Go Server](https://www.dragongoserver.net/) game will expire due to timeouts
 
 ## Useful resources
 
