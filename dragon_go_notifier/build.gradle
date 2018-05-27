@@ -22,9 +22,9 @@ android {
     defaultConfig {
         applicationId "net.tevp.dragon_go_notifier"
         minSdkVersion 19
-        targetSdkVersion 22
-        versionCode 2
-        versionName "1.1"
+        targetSdkVersion 26
+        versionCode 3
+        versionName "1.2"
         //multiDexEnabled true
     }
     signingConfigs {
