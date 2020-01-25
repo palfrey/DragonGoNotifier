@@ -72,6 +72,9 @@ object DragonServer {
         Log.d(TAG, "Content: $content")
         val items = Vector<Game>()
         val jsonObject = JSONObject(content)
+        if (jsonObject.length() == 0) {
+            throw Exception("Bad JSON content: $content")
+        }
         if (jsonObject.has("error")) {
             val error = jsonObject.getString("error")
             if (error != "") {
