@@ -63,50 +63,57 @@ object DragonServer {
 
     fun getGames(accountName: String, authToken: String): List<Game> {
         val TAG = "DragonServer::getGames"
-        val url = URL("https://www.dragongoserver.net/quick_do.php?obj=game&cmd=list&view=running&limit=all&with=user_id&lstyle=json")
-        val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
-        conn.setRequestProperty("Cookie", "cookie_handle=$accountName; cookie_sessioncode=$authToken")
-        Log.d(TAG, "Cookie: ${conn.getRequestProperty("Cookie")}")
-        val inStream = BufferedInputStream(conn.inputStream)
-        val content = toString(inStream, "UTF-8")
-        Log.d(TAG, "Content: $content")
+        var offset = 0
         val items = Vector<Game>()
-        val jsonObject = JSONObject(content)
-        if (jsonObject.length() == 0) {
-            throw Exception("Bad JSON content: $content")
-        }
-        if (jsonObject.has("error")) {
-            val error = jsonObject.getString("error")
-            if (error != "") {
-                if (error == "not_logged_in") {
-                    Log.w(TAG, "Invalid auth token")
-                    throw NotLoggedInException()
+        while (true) {
+            val url = URL("https://www.dragongoserver.net/quick_do.php?obj=game&cmd=list&view=running&off=$offset&limit=all&with=user_id&lstyle=json")
+            val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+            conn.setRequestProperty("Cookie", "cookie_handle=$accountName; cookie_sessioncode=$authToken")
+            Log.d(TAG, "Cookie: ${conn.getRequestProperty("Cookie")}")
+            val inStream = BufferedInputStream(conn.inputStream)
+            val content = toString(inStream, "UTF-8")
+            Log.d(TAG, "Content: $content")
+            val jsonObject = JSONObject(content)
+            if (jsonObject.length() == 0) {
+                throw Exception("Bad JSON content: $content")
+            }
+            if (jsonObject.has("error")) {
+                val error = jsonObject.getString("error")
+                if (error != "") {
+                    if (error == "not_logged_in") {
+                        Log.w(TAG, "Invalid auth token")
+                        throw NotLoggedInException()
+                    } else
+                        throw Exception("Error from Dragon Go server: $error")
                 }
-                else
-                    throw Exception("Error from Dragon Go server: $error")
             }
-        }
-        val records = jsonObject.getJSONArray("list_result")
-        //Log.d(TAG, records.toString(2))
-        for (i in 0 until records.length()) {
-            //Log.d(TAG, "Index: $i")
-            val record = records.getJSONObject(i)
-            //Log.d(TAG, record.toString(2))
-            val white = Player(record.getJSONObject("white_user").getString("handle"), record.getJSONObject("white_gameinfo").getString("remtime"))
-            val black = Player(record.getJSONObject("black_user").getString("handle"), record.getJSONObject("black_gameinfo").getString("remtime"))
-            val player = if (record.getString("move_color") == "W") white else black
-            val opponent = if (white.handle == accountName) black else white
-            val end_time: Date?
-            val period = periodFromDate(player.remtime)
-            if (period == null)
-                end_time = null
-            else {
-                end_time =DateTime().plus(period).toDate()
+            val records = jsonObject.getJSONArray("list_result")
+            //Log.d(TAG, records.toString(2))
+            for (i in 0 until records.length()) {
+                //Log.d(TAG, "Index: $i")
+                val record = records.getJSONObject(i)
+                //Log.d(TAG, record.toString(2))
+                val white = Player(record.getJSONObject("white_user").getString("handle"), record.getJSONObject("white_gameinfo").getString("remtime"))
+                val black = Player(record.getJSONObject("black_user").getString("handle"), record.getJSONObject("black_gameinfo").getString("remtime"))
+                val player = if (record.getString("move_color") == "W") white else black
+                val opponent = if (white.handle == accountName) black else white
+                val end_time: Date?
+                val period = periodFromDate(player.remtime)
+                if (period == null)
+                    end_time = null
+                else {
+                    end_time = DateTime().plus(period).toDate()
+                }
+                if (end_time != null) {
+                    val game = Game(record.getInt("id"), accountName, opponent.handle, end_time, player != opponent)
+                    items.add(game)
+                }
             }
-            if (end_time != null) {
-                val game = Game(record.getInt("id"), accountName, opponent.handle, end_time, player != opponent)
-                items.add(game)
+            val morePages = jsonObject.getInt("list_has_next")
+            if (morePages == 0) {
+                break
             }
+            offset += jsonObject.getInt("list_size")
         }
         Log.d(TAG, "Games: $items")
         return items

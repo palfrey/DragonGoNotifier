@@ -67,31 +67,39 @@ class HolidayDatePeriod(val fInput: String, val fExpected: Period) {
 }
 
 @RunWith(PowerMockRunner::class)
-@PowerMockRunnerDelegate(Parameterized::class)
 @PrepareForTest(IOUtils::class, Log::class)
-class GetGames(val accountName: String, val fExpected: List<Game>) {
-    companion object {
-        @Parameters
-        @JvmStatic
-        fun data(): List<Array<Any>> {
-            return listOf(
-                arrayOf<Any>("multiple-pages", Vector<Game>( mutableListOf(
-                        Game(1300500, "multiple-pages", "aendean", Date(2020, 1, 27,4,19,24), true),
-                        Game(1301036, "multiple-pages", "jposio", Date(2020,1,27,4,19,4), true)
-                    )))
-            )
-        }
-    }
-
-    @Test
-    fun getGames() {
+class GetGames {
+    private fun setupGames(vararg resource: String) {
         PowerMockito.mockStatic(Log::class.java)
         val url = PowerMockito.mock(URL::class.java)
         PowerMockito.whenNew(URL::class.java).withParameterTypes(String::class.java)
                 .withArguments(Mockito.anyString()).thenReturn(url)
-        val data = IOUtils.toString(ClassLoader.getSystemResourceAsStream("games-first-page.json"))
+
+        val resourceDatas = resource.map { s -> IOUtils.toString(ClassLoader.getSystemResourceAsStream(s)) }
         PowerMockito.mockStatic(IOUtils::class.java)
-        Mockito.`when`(IOUtils.toString(Mockito.any(InputStream::class.java), eq("UTF-8"))).thenReturn(data)
-        assertEquals(fExpected, DragonServer.getGames(accountName, ""))
+        var mock = Mockito.`when`(IOUtils.toString(Mockito.any(InputStream::class.java), eq("UTF-8")))
+        for(data in resourceDatas) {
+            mock = mock.thenReturn(data)
+        }
+    }
+
+    private fun testGames(): Vector<Game> {
+        return Vector<Game>(mutableListOf(
+                Game(1300500, "multiple-pages", "aendean", Date(2020, 1, 27, 4, 19, 24), true),
+                Game(1301036, "multiple-pages", "jposio", Date(2020, 1, 27, 4, 19, 4), true)
+        ))
+    }
+
+    @Test
+    fun getSinglePageGames() {
+        setupGames("games-one-page.json")
+        assertEquals(testGames(), DragonServer.getGames("multiple-pages", ""))
+    }
+
+    @Test
+    fun getMultiplePageGames() {
+        val games = testGames() + testGames()
+        setupGames("games-multiple-1.json", "games-multiple-2.json")
+        assertEquals(games, DragonServer.getGames("multiple-pages", ""))
     }
 }
