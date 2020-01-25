@@ -1,5 +1,5 @@
 # Dragon Go Server notifier
-[![Build Status](https://travis-ci.org/palfrey/DragonGoNotifier.svg?branch=master)](https://travis-ci.org/palfrey/DragonGoNotifier)
+[![Build Status](https://travis-ci.com/palfrey/DragonGoNotifier.svg?branch=master)](https://travis-ci.com/palfrey/DragonGoNotifier)
 
 Notifier widget for when your next [Dragon Go Server](https://www.dragongoserver.net/) game will expire due to timeouts
 
