@@ -93,13 +93,12 @@ object DragonServer {
             val black = Player(record.getJSONObject("black_user").getString("handle"), record.getJSONObject("black_gameinfo").getString("remtime"))
             val player = if (record.getString("move_color") == "W") white else black
             val opponent = if (white.handle == accountName) black else white
-            val end_time: Date? by lazy {
-                val period = periodFromDate(player.remtime)
-                if (period == null)
-                    return@lazy null
-                else {
-                    DateTime().plus(period).toDate()
-                }
+            val end_time: Date?
+            val period = periodFromDate(player.remtime)
+            if (period == null)
+                end_time = null
+            else {
+                end_time =DateTime().plus(period).toDate()
             }
             if (end_time != null) {
                 val game = Game(record.getInt("id"), accountName, opponent.handle, end_time, player != opponent)
