@@ -12,7 +12,7 @@ buildscript {
 }
 
 ext {
-    supportLibVersion = '27.1.1'  // variable that can be referenced to keep support libs consistent
+    supportLibVersion = '1.0.0-beta01'  // variable that can be referenced to keep support libs consistent
     compileSdkVersion = 28 // should match support lib major version
 }
 

@@ -59,7 +59,7 @@ class DragonAuthenticatorActivity : AccountAuthenticatorActivity() {
         }
         
         mPasswordView.setOnEditorActionListener({ _, id, _ ->
-            if (id == R.id.login || id == EditorInfo.IME_NULL) {
+            if (id == R.integer.loginImeActionId || id == EditorInfo.IME_NULL) {
                 attemptLogin()
                 true
             }
