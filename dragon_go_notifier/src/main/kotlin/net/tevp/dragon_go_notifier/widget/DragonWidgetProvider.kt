@@ -70,18 +70,23 @@ class DragonWidgetProvider : AppWidgetProvider() {
 
             val options = appWidgetManager.getAppWidgetOptions(widget_id)
             val username = options.getString(USERNAME)
-            val account = AccountManager.get(context).getAccountsByType(ACCOUNT_TYPE).single { it.name == username }
-            val syncRequest = SyncRequest.Builder()
-                    .setManual(true)
-                    .setExpedited(true)
-                    .setSyncAdapter(account, AUTHORITY)
-                    .syncOnce()
+            try {
+                val account = AccountManager.get(context).getAccountsByType(ACCOUNT_TYPE).single { it.name == username }
+                val syncRequest = SyncRequest.Builder()
+                        .setManual(true)
+                        .setExpedited(true)
+                        .setSyncAdapter(account, AUTHORITY)
+                        .syncOnce()
 
-            // Fix bug in Android Lollipop
-            val extras = Bundle()
-            syncRequest.setExtras(extras)
+                // Fix bug in Android Lollipop
+                val extras = Bundle()
+                syncRequest.setExtras(extras)
 
-            ContentResolver.requestSync(syncRequest.build())
+                ContentResolver.requestSync(syncRequest.build())
+
+            } catch (e: NoSuchElementException) {
+                Log.e(TAG, "Can't find account for $username. Found ${AccountManager.get(context).getAccountsByType(ACCOUNT_TYPE)}")
+            }
         }
         else
             super.onReceive(context, intent)
