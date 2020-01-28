@@ -1,5 +1,6 @@
 package net.tevp.dragon_go_notifier.widget
 
+import DragonUtils
 import android.accounts.AccountManager
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -35,7 +36,7 @@ class DragonWidgetProvider : AppWidgetProvider() {
     var updaterBooted = false
 
     override fun onEnabled(context: Context) {
-        context.startService(Intent(context, DragonWidgetUpdaterService::class.java))
+        DragonUtils.startService(context, Intent(context, DragonWidgetUpdaterService::class.java))
         updaterBooted = true
     }
 
@@ -106,7 +107,7 @@ class DragonWidgetProvider : AppWidgetProvider() {
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
         if (!updaterBooted) {
-            context.startService(Intent(context, DragonWidgetUpdaterService::class.java))
+            DragonUtils.startService(context, Intent(context, DragonWidgetUpdaterService::class.java))
         }
         for (widget_id in appWidgetIds) {
             Log.d(TAG, "Widget update $widget_id")

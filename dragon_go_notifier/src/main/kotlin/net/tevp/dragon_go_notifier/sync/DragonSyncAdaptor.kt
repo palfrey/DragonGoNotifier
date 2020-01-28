@@ -1,5 +1,6 @@
 package net.tevp.dragon_go_notifier.sync
 
+import DragonUtils
 import android.accounts.Account
 import android.accounts.AccountManager
 import android.content.*
@@ -20,7 +21,7 @@ class DragonSyncAdapter(context: Context, autoInitialize: Boolean) : AbstractThr
     private val TAG = "DragonSyncAdapter"
 
     override fun onPerformSync(account: Account, extras: Bundle, authority: String, provider: ContentProviderClient, syncResult: SyncResult) {
-        context.startService(Intent(context, DragonWidgetUpdaterService::class.java))
+        DragonUtils.startService(context, Intent(context, DragonWidgetUpdaterService::class.java))
         Log.d(TAG, "onPerformSync for account[" + account.name + "]")
         val authToken = mAccountManager.blockingGetAuthToken(account, DragonAuthenticatorActivity.AUTHTOKEN_TYPE_FULL_ACCESS, true)
         try {
