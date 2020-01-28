@@ -72,6 +72,8 @@ object DragonServer {
             Log.d(TAG, "Cookie: ${conn.getRequestProperty("Cookie")}")
             val inStream = BufferedInputStream(conn.inputStream)
             val content = toString(inStream, "UTF-8")
+            inStream.close()
+            conn.disconnect()
             Log.d(TAG, "Content: $content")
             val jsonObject = JSONObject(content)
             if (jsonObject.length() == 0) {
@@ -113,7 +115,12 @@ object DragonServer {
             if (morePages == 0) {
                 break
             }
-            offset += jsonObject.getInt("list_size")
+            val increment = jsonObject.getInt("list_size")
+            if (increment == 0) {
+                Log.w(TAG, "Zero list_size")
+                break
+            }
+            offset += increment
         }
         Log.d(TAG, "Games: $items")
         return items
